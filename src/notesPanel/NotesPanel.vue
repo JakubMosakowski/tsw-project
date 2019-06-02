@@ -1,11 +1,15 @@
 <template>
-  <div id="notesPanelWrapper"><h1>Wyniki</h1></div>
+  <div id="notesPanelWrapper">
+    <h1>Wyniki</h1>
+  </div>
 </template>
 
-<script>
-export default {
-  name: "NotesPanel"
-};
+<script lang="ts">
+import Vue from "vue";
+import Component from "vue-class-component";
+
+@Component
+export default class NotesPanel extends Vue {}
 </script>
 
 <style scoped lang="scss"></style>

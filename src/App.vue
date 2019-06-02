@@ -25,9 +25,14 @@ body {
   background: $secondary-color;
 }
 </style>
-<script>
-import Navbar from "./commons/navbar/Navbar.vue";
-export default {
-  components: { Navbar }
-};
+<script lang="ts">
+import Vue from "vue";
+import Component from "vue-class-component";
+import Navbar from "@/commons/navbar/Navbar.vue";
+@Component({
+  components: {
+    Navbar
+  }
+})
+export default class App extends Vue {}
 </script>

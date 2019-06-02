@@ -1,15 +1,38 @@
 <template>
   <div id="navbarWrapper">
-    <router-link :to="{ name: 'home' }">WYSTAWY</router-link>
-    <router-link :to="{ name: 'adminPanel' }">PANEL ADMINA</router-link>
-    <router-link :to="{ name: 'notesPanel' }">PANEL PROWADZĄCEGO</router-link>
+    <router-link :to="{ name: 'home' }">
+      WYSTAWY
+    </router-link>
+    <router-link :to="{ name: 'adminPanel' }" v-if="isLoggedIn">
+      PANEL ADMINA
+    </router-link>
+    <router-link :to="{ name: 'notesPanel' }" v-if="isLoggedIn">
+      PANEL PROWADZĄCEGO
+    </router-link>
+    <a v-if="isLoggedIn" @click="logout">Logout</a>
+    <router-link v-else :to="{ name: 'login' }">
+      LOGOWANIE
+    </router-link>
   </div>
 </template>
 
-<script>
-export default {
-  name: "Navbar"
-};
+<script lang="ts">
+//TODO fix navbar to show gray
+import Vue from "vue";
+import Component from "vue-class-component";
+
+@Component
+export default class Navbar extends Vue {
+  get isLoggedIn(): boolean {
+    return this.$store.getters.isLoggedIn;
+  }
+
+  logout() {
+    this.$store.dispatch("logout").then(() => {
+      this.$router.push("/login");
+    });
+  }
+}
 </script>
 
 <style scoped lang="scss">
