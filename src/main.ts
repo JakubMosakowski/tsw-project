@@ -1,9 +1,16 @@
 import Vue from "vue";
-import App from "./App.vue";
+import App from "./presentation/App.vue";
 import router from "./router";
-import store from "./store/store";
+import store from "./data/store/store";
 import Axios from "axios";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 
+library.add(faEdit);
+library.add(faTrash);
+
+Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.prototype.$http = Axios;
 const token = localStorage.getItem("token");
 if (token) {
@@ -13,6 +20,7 @@ Vue.config.productionTip = false;
 
 //TODO PANEL ADMINA:
 //todo ekran listy konia (z usuwaniem na iksie)
+//todo przejście do szczegółów konia
 //todo ekran listy judge (z usuwaniem na iksie)
 //todo ekran listy rank (z usuwaniem na iksie)
 //todo ekran listy contest (z usuwaniem na iksie)
@@ -31,7 +39,7 @@ Vue.config.productionTip = false;
 //todo możliwość zmiany numerów startowych koni (osobny ekran) - lista od 0 do X. Każdy rząd ma swój numer i swojego konia.
 // Możliwość przestawiania w kolejnosci koni [co zmienia im numer].
 // Po kliknieciu w numer - edycja numeru, po zaakceptowaniu enterem zmienia sie kolejnosc na liscie.
-// Po zapisie wysyła się do api.
+// Po zapisie wysyła się do API.
 
 //TODO PANEL KIBICA
 //todo  możliwość obserwowania klasyfikacji w poszczególnych klasach (dane przesyłane „na żywo” przez Websockets – socket.io)

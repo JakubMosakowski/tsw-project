@@ -1,7 +1,7 @@
 import { MutationTree } from "vuex";
-import { ProfileState } from "@/store/modules/profile/profileState";
-import { Status } from "@/model/Status";
-import { User } from "@/model/User";
+import { ProfileState } from "@/data/store/modules/profile/profileState";
+import { Status } from "@/domain/model/Status";
+import { User } from "@/domain/model/User";
 
 export interface UserPayload {
   user: User;

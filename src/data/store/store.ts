@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex, { StoreOptions } from "vuex";
-import { profile } from "@/store/modules/profile/profile";
+import { profile } from "@/data/store/modules/profile/profile";
 
 Vue.use(Vuex);
 

@@ -1,10 +1,11 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "@/home/Home.vue";
-import AdminsPanel from "@/adminPanel/AdminPanel.vue";
-import NotesPanel from "@/notesPanel/NotesPanel.vue";
-import Login from "@/login/Login.vue";
-import store from "@/store/store";
+import Home from "@/presentation/home/Home.vue";
+import AdminsPanel from "@/presentation/adminPanel/AdminPanel.vue";
+import NotesPanel from "@/presentation/notesPanel/NotesPanel.vue";
+import Login from "@/presentation/login/Login.vue";
+import store from "@/data/store/store";
+import Horses from "@/presentation/adminPanel/components/Horses.vue";
 
 Vue.use(Router);
 
@@ -34,6 +35,38 @@ let router = new Router({
     {
       path: "/notesPanel",
       name: "notesPanel",
+      component: NotesPanel,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/contests",
+      name: "contests",
+      component: NotesPanel,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/horses",
+      name: "horses",
+      component: Horses,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/judges",
+      name: "judges",
+      component: NotesPanel,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/ranks",
+      name: "ranks",
       component: NotesPanel,
       meta: {
         requiresAuth: true

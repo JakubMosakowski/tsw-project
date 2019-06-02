@@ -7,8 +7,8 @@
 
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,600,800");
-@import "../node_modules/bootstrap/scss/bootstrap";
-@import "../node_modules/bootstrap-vue/src/index.scss";
+@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "../../node_modules/bootstrap-vue/src/index";
 @import "assets/colors";
 body {
   font-family: "Montserrat", sans-serif;
@@ -28,7 +28,7 @@ body {
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import Navbar from "@/commons/navbar/Navbar.vue";
+import Navbar from "@/presentation/commons/navbar/Navbar.vue";
 @Component({
   components: {
     Navbar

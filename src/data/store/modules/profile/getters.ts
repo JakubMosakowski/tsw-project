@@ -1,5 +1,5 @@
-import { RootState } from "@/store/store";
-import { ProfileState } from "@/store/modules/profile/profileState";
+import { RootState } from "@/data/store/store";
+import { ProfileState } from "@/data/store/modules/profile/profileState";
 import { GetterTree } from "vuex";
 
 export const getters: GetterTree<ProfileState, RootState> = {

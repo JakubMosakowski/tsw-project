@@ -16,7 +16,7 @@
 import CustomButton from "../commons/components/CustomButton.vue";
 import Vue from "vue";
 import Component from "vue-class-component";
-import { Status } from "@/model/Status";
+import { Status } from "@/domain/model/Status";
 
 @Component({
   components: {
