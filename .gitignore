@@ -19,3 +19,7 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+*.js
+*.js.map
+*.css.map
+*.css
