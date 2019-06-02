@@ -1,31 +1,38 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <Navbar />
+    <router-view id="content" />
   </div>
 </template>
 
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<style lang="scss">
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,600,800");
+@import "../node_modules/bootstrap/scss/bootstrap";
+@import "../node_modules/bootstrap-vue/src/index.scss";
+@import "assets/colors";
+body {
+  font-family: "Montserrat", sans-serif;
+  background-color: $primary-color;
+  width: 100%;
 }
-#nav {
+#content {
+  display: flex;
+  max-width: 500px;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px auto;
   padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+  background: $secondary-color;
 }
 </style>
+<script lang="ts">
+import Vue from "vue";
+import Component from "vue-class-component";
+import Navbar from "@/commons/navbar/Navbar.vue";
+@Component({
+  components: {
+    Navbar
+  }
+})
+export default class App extends Vue {}
+</script>
