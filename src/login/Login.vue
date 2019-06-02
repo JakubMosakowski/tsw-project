@@ -1,20 +1,14 @@
 <template>
   <div id="loginWrapper">
-    <form class="login" @submit.prevent="login">
-      <h1>Logowanie</h1>
-      <label>
-        <input v-model="name" required placeholder="Nazwa" />
-      </label>
-      <label>
-        <input
-          v-model="password"
-          required
-          type="password"
-          placeholder="Hasło"
-        />
-      </label>
-      <CustomButton type="submit" text="Zaloguj" />
-    </form>
+    <h1>Logowanie</h1>
+    <p v-if="authStatus">Wrong login or password!</p>
+    <label>
+      <input v-model="name" required placeholder="Nazwa" />
+    </label>
+    <label>
+      <input v-model="password" required type="password" placeholder="Hasło" />
+    </label>
+    <CustomButton @clicked="login" text="Zaloguj" />
   </div>
 </template>
 
@@ -22,10 +16,16 @@
 import CustomButton from "../commons/components/CustomButton.vue";
 import Vue from "vue";
 import Component from "vue-class-component";
+import { Status } from "@/model/Status";
 
 @Component({
   components: {
     CustomButton
+  },
+  computed: {
+    authStatus: function() {
+      return this.$store.getters.authStatus == Status.ERROR;
+    }
   }
 })
 export default class Login extends Vue {
@@ -38,7 +38,7 @@ export default class Login extends Vue {
     this.$store
       .dispatch("login", { name, password })
       .then(() => this.$router.push("/"))
-      .catch(err => console.log(err));
+      .catch();
   }
 }
 </script>
@@ -53,8 +53,12 @@ form {
   flex-direction: column;
 }
 
-label {
+#loginWrapper {
   padding: 10px;
+}
+
+p {
+  color: red;
 }
 
 input {

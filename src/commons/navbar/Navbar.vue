@@ -9,7 +9,7 @@
     <router-link :to="{ name: 'notesPanel' }" v-if="isLoggedIn">
       PANEL PROWADZĄCEGO
     </router-link>
-    <a v-if="isLoggedIn" @click="logout">Logout</a>
+    <a v-if="isLoggedIn" @click="logout">Wyloguj</a>
     <router-link v-else :to="{ name: 'login' }">
       LOGOWANIE
     </router-link>
@@ -17,7 +17,6 @@
 </template>
 
 <script lang="ts">
-//TODO fix navbar to show gray
 import Vue from "vue";
 import Component from "vue-class-component";
 
@@ -52,7 +51,7 @@ export default class Navbar extends Vue {
 }
 
 a {
-  color: $primary-text-color;
+  color: $primary-text-color !important;
   padding: 15px;
   font-weight: bold;
 }
@@ -62,6 +61,7 @@ a:hover {
   text-shadow: 1px 1px 10px $secondary-text-color,
     1px 1px 10px $secondary-text-color;
   text-decoration: none;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 480px) {

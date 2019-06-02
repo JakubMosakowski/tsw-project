@@ -11,15 +11,6 @@ if (token) {
 }
 Vue.config.productionTip = false;
 
-//TODO navbar z logowaniem i ukrytym panelem admina i prowadzącego
-//todo po zalogowaniu panel admina i prowadzacego mozna kliknac (wpisanie urla z palca nie powinno być możliwe)
-
-//TODO PANEL KIBICA
-//todo  możliwość obserwowania klasyfikacji w poszczególnych klasach (dane przesyłane „na żywo” przez Websockets – socket.io)
-//todo  możliwośc podejrzenia rankingów klas już zakończonych
-
-//TODO LOGOWANIE do panelu admina i prowadzącego (przy użyciu socket.io)
-
 //TODO PANEL ADMINA:
 //todo ekran listy konia (z usuwaniem na iksie)
 //todo ekran listy judge (z usuwaniem na iksie)
@@ -41,6 +32,10 @@ Vue.config.productionTip = false;
 // Możliwość przestawiania w kolejnosci koni [co zmienia im numer].
 // Po kliknieciu w numer - edycja numeru, po zaakceptowaniu enterem zmienia sie kolejnosc na liscie.
 // Po zapisie wysyła się do api.
+
+//TODO PANEL KIBICA
+//todo  możliwość obserwowania klasyfikacji w poszczególnych klasach (dane przesyłane „na żywo” przez Websockets – socket.io)
+//todo  możliwośc podejrzenia rankingów klas już zakończonych
 
 //TODO PANEL PROWADZĄCEGO POKAZ
 //todo Najważniejszy element to wprowadzanie ocen spływających od poszczególnych sędziów (t, g, k, n, r) – każda nota jest liczbą z przedziału [0..20], ze stopniowaniem 0.5.
