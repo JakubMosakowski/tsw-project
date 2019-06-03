@@ -1,5 +1,5 @@
 <template>
-  <div id="loginWrapper">
+  <div class="loginWrapper">
     <h1>Logowanie</h1>
     <p v-if="authStatus">Wrong login or password!</p>
     <label>
@@ -53,7 +53,7 @@ form {
   flex-direction: column;
 }
 
-#loginWrapper {
+.loginWrapper {
   padding: 10px;
 }
 

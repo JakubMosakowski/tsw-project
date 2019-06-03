@@ -6,6 +6,7 @@ import NotesPanel from "@/presentation/notesPanel/NotesPanel.vue";
 import Login from "@/presentation/login/Login.vue";
 import store from "@/data/store/store";
 import Horses from "@/presentation/adminPanel/components/Horses.vue";
+import HorseDetail from "@/presentation/adminPanel/components/HorseDetail.vue";
 
 Vue.use(Router);
 
@@ -44,6 +45,15 @@ let router = new Router({
       path: "/contests",
       name: "contests",
       component: NotesPanel,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/horses/:id",
+      name: "horseDetail",
+      component: HorseDetail,
+      props: true,
       meta: {
         requiresAuth: true
       }

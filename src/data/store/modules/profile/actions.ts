@@ -7,19 +7,18 @@ import { API } from "@/data/api/API";
 export const actions: ActionTree<ProfileState, RootState> = {
   login({ commit }, user: User) {
     return new Promise(resolve => {
-      commit("auth_request");
+      commit("authRequest");
       API.login(user)
-        .then(resp => {
-          const token = resp.data.token;
-          const user = resp.data.user;
-          const userPayload = { user: user, token: token };
+        .then(res => {
+          const { token, user } = res.data;
+          const userPayload = { user, token };
 
           localStorage.setItem("token", token);
-          commit("auth_success", userPayload);
-          resolve(resp);
+          commit("authSuccess", userPayload);
+          resolve(res);
         })
         .catch(err => {
-          commit("auth_error", err);
+          commit("authError", err);
           localStorage.removeItem("token");
         });
     });

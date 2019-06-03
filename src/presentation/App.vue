@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
+  <div class="app">
     <Navbar />
-    <router-view id="content" />
+    <router-view class="content" />
   </div>
 </template>
 
@@ -15,7 +15,7 @@ body {
   background-color: $primary-color;
   width: 100%;
 }
-#content {
+.content {
   display: flex;
   max-width: 500px;
   flex-direction: column;

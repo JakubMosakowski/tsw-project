@@ -1,8 +1,7 @@
 <template>
   <button
-    id="customButton"
     :disabled="!isEnabled"
-    class="button"
+    class="button customButton"
     :class="color"
     @click="$emit('clicked')"
   >

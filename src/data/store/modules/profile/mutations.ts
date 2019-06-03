@@ -8,15 +8,15 @@ export interface UserPayload {
   token: string;
 }
 export const mutations: MutationTree<ProfileState> = {
-  auth_request(state) {
+  authRequest(state) {
     state.status = Status.LOADING;
   },
-  auth_success(state: ProfileState, payload: UserPayload) {
+  authSuccess(state: ProfileState, payload: UserPayload) {
     state.status = Status.SUCCESS;
     state.user = payload.user;
     state.token = payload.token;
   },
-  auth_error(state) {
+  authError(state) {
     state.status = Status.ERROR;
   },
   logout(state) {

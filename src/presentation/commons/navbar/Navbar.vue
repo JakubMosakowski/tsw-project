@@ -1,5 +1,5 @@
 <template>
-  <div id="navbarWrapper">
+  <div class="navbarWrapper">
     <router-link :to="{ name: 'home' }">
       WYSTAWY
     </router-link>
@@ -37,7 +37,7 @@ export default class Navbar extends Vue {
 <style scoped lang="scss">
 @import "../../assets/colors";
 
-#navbarWrapper {
+.navbarWrapper {
   display: flex;
   flex-direction: row;
   background: $secondary-color;
@@ -69,7 +69,7 @@ a:hover {
     padding: 10px;
     font-size: 0.7em;
   }
-  #navbarWrapper {
+  .navbarWrapper {
     justify-content: space-around;
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div id="adminPanelWrapper">
+  <div class="adminPanelWrapper">
     <h1>Panel admina</h1>
     <CustomButton @clicked="contests" text="Konkursy" />
     <CustomButton @clicked="horses" text="Konie" />
@@ -32,7 +32,7 @@ export default class AdminPanel extends Vue {
 </script>
 
 <style scoped lang="scss">
-#customButton {
+.customButton {
   width: 200px;
   margin: 20px;
 }

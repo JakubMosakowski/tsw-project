@@ -1,5 +1,5 @@
 <template>
-  <div id="notesPanelWrapper">
+  <div class="notesPanelWrapper">
     <h1>Wyniki</h1>
   </div>
 </template>
