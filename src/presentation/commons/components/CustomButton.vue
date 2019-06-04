@@ -50,6 +50,16 @@ export default class CustomButton extends Vue {}
   }
 }
 
+.green {
+  background: green !important;
+  border-color: green !important;
+
+  &:hover {
+    background: darken(green, 10%) !important;
+    border-color: darken(green, 10%) !important;
+  }
+}
+
 .button {
   background: $primary-color;
   border-color: $primary-color;

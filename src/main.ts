@@ -5,10 +5,17 @@ import store from "./data/store/store";
 import Axios from "axios";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEdit,
+  faTrash,
+  faPlus,
+  faSort
+} from "@fortawesome/free-solid-svg-icons";
 
 library.add(faEdit);
 library.add(faTrash);
+library.add(faPlus);
+library.add(faSort);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.prototype.$http = Axios;

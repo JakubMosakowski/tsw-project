@@ -16,11 +16,12 @@ import { RacingHorse } from "@/domain/model/Horse";
   }
 })
 export default class HorseDetail extends Vue {
-  get horse(): RacingHorse {
+  get horse(): RacingHorse | undefined {
     return this.$store.getters.horses.find(
       (item: RacingHorse) => item.id == this.$route.params.id
     );
   }
+  //todo stwórz wszystkie pola + ustaw im defaul wartość jeżeli jest koń
 }
 </script>
 

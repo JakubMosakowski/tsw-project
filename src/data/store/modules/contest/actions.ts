@@ -36,6 +36,20 @@ export const actions: ActionTree<ContestState, RootState> = {
   horsesFetchedFromSocket({ commit }, horses: RacingHorse[]) {
     commit("horsesFetchedFromSocket", horses);
   },
+  horsesReordered({ commit }, horses: RacingHorse[]) {
+    return new Promise(resolve => {
+      commit("loading");
+      API.reorderHorses(horses)
+        .then(res => {
+          commit("horsesReordered", horses);
+          resolve(res);
+        })
+        .catch(err => {
+          console.log(err);
+          commit("error", err);
+        });
+    });
+  },
   horsesCreated({ commit }) {
     return new Promise(resolve => {
       commit("loading");

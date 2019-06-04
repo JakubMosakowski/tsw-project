@@ -16,11 +16,21 @@ export class API {
   static login(user: User) {
     return API.execute(POST, "/login", user);
   }
+
   static getHorses() {
     return API.execute(GET, "/horses");
   }
   static getHorse(id: string) {
     return API.execute(GET, `/horses/${id}`);
+  }
+  static reorderHorses(horses: RacingHorse[]) {
+    const data = {
+      horseNumberList: horses.map(item => {
+        return { id: item.id, newNumber: item.number };
+      })
+    };
+
+    return API.execute(POST, `/rearrangeHorseNumbers`, data);
   }
   static createHorse(data: RacingHorse) {
     return API.execute(POST, "/horses", data);

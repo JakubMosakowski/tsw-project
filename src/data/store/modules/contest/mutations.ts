@@ -20,10 +20,14 @@ export const mutations: MutationTree<ContestState> = {
   contestDeleted(state, contest: Contest) {
     state.contests = state.contests.filter(item => item != contest);
   },
-  horsesFetched(state, horses: RacingHorse[]) {
+
+  horsesFetchedFromSocket(state, horses: RacingHorse[]) {
     state.horses = horses;
   },
-  horsesFetchedFromSocket(state, horses: RacingHorse[]) {
+  horsesReordered(state, horses: RacingHorse[]) {
+    state.horses = horses;
+  },
+  horsesFetched(state, horses: RacingHorse[]) {
     state.horses = horses;
   },
   horseDeleted(state, horse: RacingHorse) {
