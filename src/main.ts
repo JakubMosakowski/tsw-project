@@ -43,7 +43,6 @@ Vue.config.productionTip = false;
 
 //TODO PANEL KIBICA
 //todo  możliwość obserwowania klasyfikacji w poszczególnych klasach (dane przesyłane „na żywo” przez Websockets – socket.io)
-//todo  możliwośc podejrzenia rankingów klas już zakończonych
 
 //TODO PANEL PROWADZĄCEGO POKAZ
 //todo Najważniejszy element to wprowadzanie ocen spływających od poszczególnych sędziów (t, g, k, n, r) – każda nota jest liczbą z przedziału [0..20], ze stopniowaniem 0.5.
