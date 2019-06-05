@@ -1,5 +1,5 @@
 <template>
-  <div class="cellWrapper">
+  <div class="cellWrapper" @click="cellClicked">
     <h3>{{ label }}</h3>
     <EditAndDelete
       v-if="withButtons"
@@ -12,7 +12,7 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import EditAndDelete from "@/presentation/adminPanel/components/EditAndDelete.vue";
+import EditAndDelete from "@/presentation/commons/components/EditAndDelete.vue";
 
 @Component({
   props: {
@@ -31,6 +31,10 @@ export default class Cell extends Vue {
 
   editClicked() {
     this.$emit("editClicked");
+  }
+
+  cellClicked() {
+    this.$emit("cellClicked");
   }
 }
 </script>

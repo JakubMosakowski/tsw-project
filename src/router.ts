@@ -5,9 +5,10 @@ import AdminsPanel from "@/presentation/adminPanel/AdminPanel.vue";
 import NotesPanel from "@/presentation/notesPanel/NotesPanel.vue";
 import Login from "@/presentation/login/Login.vue";
 import store from "@/data/store/store";
-import Horses from "@/presentation/adminPanel/components/Horses.vue";
-import HorseDetail from "@/presentation/adminPanel/components/HorseDetail.vue";
-import HorseReorder from "@/presentation/adminPanel/components/HorseReorder.vue";
+import Horses from "@/presentation/adminPanel/components/horse/Horses.vue";
+import HorseDetail from "@/presentation/adminPanel/components/horse/HorseDetail.vue";
+import HorseReorder from "@/presentation/adminPanel/components/horse/HorseReorder.vue";
+import NoteDetail from "@/presentation/notesPanel/NoteDetail.vue";
 
 Vue.use(Router);
 
@@ -38,6 +39,16 @@ let router = new Router({
       path: "/notesPanel",
       name: "notesPanel",
       component: NotesPanel,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/notes/:id",
+      name: "noteDetail",
+      component: NoteDetail,
+      props: true,
+
       meta: {
         requiresAuth: true
       }

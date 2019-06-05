@@ -12,7 +12,7 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import CustomButton from "@/presentation/commons/components/CustomButton.vue";
 import { RacingHorse } from "@/domain/model/Horse";
-import Cell from "@/presentation/adminPanel/components/Cell.vue";
+import Cell from "@/presentation/commons/components/Cell.vue";
 
 @Component({
   components: {
