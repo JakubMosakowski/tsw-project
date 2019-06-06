@@ -2,7 +2,6 @@ import { MutationTree } from "vuex";
 import { ContestState } from "@/data/store/modules/contest/contestState";
 import { Status } from "@/domain/model/Status";
 import { RacingHorse } from "@/domain/model/Horse";
-import { Contest } from "@/domain/model/Contest";
 import { Judge } from "@/domain/model/Judge";
 import { Rank } from "@/domain/model/Rank";
 
@@ -12,13 +11,6 @@ export const mutations: MutationTree<ContestState> = {
   },
   error(state) {
     state.status = Status.ERROR;
-  },
-
-  contestsFetchedFromSocket(state, contests: Contest[]) {
-    state.contests = contests;
-  },
-  contestDeleted(state, contest: Contest) {
-    state.contests = state.contests.filter(item => item != contest);
   },
 
   horsesFetchedFromSocket(state, horses: RacingHorse[]) {

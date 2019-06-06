@@ -30,18 +30,15 @@ Vue.config.productionTip = false;
 //todo przejście do szczegółów konia
 //todo ekran listy judge (z usuwaniem na iksie)
 //todo ekran listy rank (z usuwaniem na iksie)
-//todo ekran listy contest (z usuwaniem na iksie)
 
 //todo ekran dodawania konia
 //todo ekran dodawania judge
 //todo ekran dodawania rank
-//todo ekran dodawania contest
 
 //todo ekran edytowania konia
 //todo możliwość przeniesienia konia z klasy do klasy (jakis ladny dropdown do wyboru jednej z klas) przy edycji konia.
 //todo ekran edytowania judge
 //todo ekran edytowania rank
-//todo ekran edytowania contest
 //todo możliwość edycji komisji sędziowskich dla poszczególnych klas (zaznaczenie checkboxem kto ma być w komisji) przy edycji klasy.
 //todo możliwość zmiany numerów startowych koni (osobny ekran) - lista od 0 do X. Każdy rząd ma swój numer i swojego konia.
 // Możliwość przestawiania w kolejnosci koni [co zmienia im numer].
@@ -55,6 +52,7 @@ Vue.config.productionTip = false;
 //todo Najważniejszy element to wprowadzanie ocen spływających od poszczególnych sędziów (t, g, k, n, r) – każda nota jest liczbą z przedziału [0..20], ze stopniowaniem 0.5.
 //todo logowanie bo stałych passach np. admin admin
 
+//TODO sprawdz jak dziala na telefonach
 new Vue({
   router,
   store,

@@ -7,7 +7,6 @@ import { RootState } from "../../store";
 
 export const state: ContestState = {
   status: undefined,
-  contests: [],
   horses: [],
   judges: [],
   ranks: []

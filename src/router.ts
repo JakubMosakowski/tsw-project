@@ -54,14 +54,6 @@ let router = new Router({
       }
     },
     {
-      path: "/contests",
-      name: "contests",
-      component: NotesPanel,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
       path: "/horseReorder",
       name: "horseReorder",
       component: HorseReorder,

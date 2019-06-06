@@ -3,7 +3,6 @@ import { ActionTree } from "vuex";
 import { API } from "@/data/api/API";
 import { RacingHorse } from "@/domain/model/Horse";
 import { ContestState } from "@/data/store/modules/contest/contestState";
-import { Contest } from "@/domain/model/Contest";
 import { Judge } from "@/domain/model/Judge";
 import { Rank } from "@/domain/model/Rank";
 import { socket } from "@/data/sockets/socketManager";
@@ -11,9 +10,6 @@ import { socket } from "@/data/sockets/socketManager";
 export const actions: ActionTree<ContestState, RootState> = {
   homeCreated: ({ dispatch }) => {
     socket.emit("connected");
-    socket.on("contests", (data: Contest[]) => {
-      dispatch("contestsFetchedFromSocket", data).catch();
-    });
     socket.on("horses", (data: RacingHorse[]) => {
       dispatch("horsesFetchedFromSocket", data).catch();
     });
@@ -27,10 +23,6 @@ export const actions: ActionTree<ContestState, RootState> = {
 
   homeDestroyed: () => {
     socket.removeAllListeners();
-  },
-
-  contestsFetchedFromSocket({ commit }, contests: Contest[]) {
-    commit("contestsFetchedFromSocket", contests);
   },
 
   horsesFetchedFromSocket({ commit }, horses: RacingHorse[]) {

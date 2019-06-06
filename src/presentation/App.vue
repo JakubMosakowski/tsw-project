@@ -17,7 +17,7 @@ body {
 }
 .content {
   display: flex;
-  max-width: 500px;
+  max-width: 600px;
   flex-direction: column;
   align-items: center;
   margin: 50px auto;

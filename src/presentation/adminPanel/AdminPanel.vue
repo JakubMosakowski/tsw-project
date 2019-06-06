@@ -1,7 +1,6 @@
 <template>
   <div class="adminPanelWrapper">
     <h1>Panel admina</h1>
-    <CustomButton @clicked="contests" text="Konkursy" />
     <CustomButton @clicked="horses" text="Konie" />
     <CustomButton @clicked="judges" text="Sędziowie" />
     <CustomButton @clicked="ranks" text="Klasy" />
@@ -16,9 +15,6 @@ import CustomButton from "@/presentation/commons/components/CustomButton.vue";
   components: { CustomButton }
 })
 export default class AdminPanel extends Vue {
-  contests() {
-    this.$router.push("/contests");
-  }
   horses() {
     this.$router.push("/horses");
   }
