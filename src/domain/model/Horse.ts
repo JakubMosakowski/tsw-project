@@ -32,3 +32,10 @@ export interface Notes {
   legs: number;
   movement: number;
 }
+export enum NoteNumber {
+  TYPE,
+  HEAD,
+  LOG,
+  LEGS,
+  MOVEMENT
+}

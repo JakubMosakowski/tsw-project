@@ -2,8 +2,13 @@
   <div class="noteDetailWrapper">
     <h1>{{ horse.name }}</h1>
     <TableHeader />
-    <div v-for="(judge, index) in judges" v-bind:key="judge.id">
-      <NotesRow :judge="judge" :notes="notes[index]" />
+    <div v-for="(judge, index) in judgesInCommittee" v-bind:key="judge.id">
+      <NotesRow
+        :judge="judge"
+        :notes="notes[index]"
+        :row="index"
+        @valueUpdated="valueUpdated"
+      />
     </div>
     <div id="sums">
       <div id="sumLeft">{{ sumLeft }}</div>
@@ -25,6 +30,7 @@ import { Judge } from "@/domain/model/Judge";
 import { Rank } from "@/domain/model/Rank";
 import TableHeader from "@/presentation/notesPanel/TableHeader.vue";
 import NotesRow from "@/presentation/notesPanel/NotesRow.vue";
+import { Getter } from "vuex-class";
 
 @Component({
   components: {
@@ -34,10 +40,21 @@ import NotesRow from "@/presentation/notesPanel/NotesRow.vue";
   }
 })
 export default class NoteDetail extends Vue {
+  @Getter("horses") horses!: RacingHorse[];
+  @Getter("judges") judges!: Judge[];
+  @Getter("ranks") ranks!: Rank[];
+
   get horse(): RacingHorse {
-    return this.$store.getters.horses.find(
+    return this.horses.find(
       (item: RacingHorse) => item.id == this.$route.params.id
-    );
+    )!;
+  }
+
+  valueUpdated(notes: Notes, row: number) {
+    const horse = this.horse;
+    horse.notes[row] = notes;
+
+    this.$store.dispatch("horseUpdated", horse).catch();
   }
 
   get notes(): Notes[] {
@@ -48,22 +65,19 @@ export default class NoteDetail extends Vue {
     return this.horse.rank;
   }
 
-  get judges(): Judge[] {
-    return this.$store.getters.judges.filter((item: Judge) =>
+  get judgesInCommittee(): Judge[] {
+    return this.judges.filter((item: Judge) =>
       this.rank.committee.includes(item.id)
     );
   }
 
   get sumLeft(): Number {
-    const numbers = this.notes.map((note: Notes) => note.type);
-    console.log(numbers);
+    const numbers = this.notes.map((note: Notes) => note.head);
     return numbers.reduce((a: number, b: number) => a + b, 0);
   }
 
   get sumRight(): Number {
-    const numbers = this.notes.map((note: Notes) => note.movement);
-    console.log(numbers);
-
+    const numbers = this.notes.map((note: Notes) => note.type);
     return numbers.reduce((a: number, b: number) => a + b, 0);
   }
 

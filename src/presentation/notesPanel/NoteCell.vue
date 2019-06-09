@@ -1,6 +1,6 @@
 <template>
   <div class="noteCellWrapper">
-    <p>{{ value }}</p>
+    <p>{{ note }}</p>
     <CustomButton text="-" @clicked="minusClicked" :isEnabled="canSubtract()" />
     <CustomButton text="+" @clicked="plusClicked" :isEnabled="canAdd()" />
   </div>
@@ -18,24 +18,19 @@ import CustomButton from "@/presentation/commons/components/CustomButton.vue";
   }
 })
 export default class NoteCell extends Vue {
-  value = 0;
-
-  mounted() {
-    this.value = this.$props.note;
-  }
   plusClicked() {
-    this.value += 0.5;
+    this.$emit("plusClicked");
   }
 
   minusClicked() {
-    this.value -= 0.5;
+    this.$emit("minusClicked");
   }
 
   canAdd() {
-    return this.value < 20;
+    return this.$props.note < 20;
   }
   canSubtract() {
-    return this.value > 0;
+    return this.$props.note > 0;
   }
 }
 </script>

@@ -13,24 +13,22 @@ export const mutations: MutationTree<ContestState> = {
     state.status = Status.ERROR;
   },
 
-  horsesFetchedFromSocket(state, horses: RacingHorse[]) {
-    state.horses = horses;
-  },
-  horsesReordered(state, horses: RacingHorse[]) {
-    state.horses = horses;
-  },
   horsesFetched(state, horses: RacingHorse[]) {
     state.horses = horses;
   },
   horseDeleted(state, horse: RacingHorse) {
     state.horses = state.horses.filter(item => item != horse);
   },
+  horseUpdated(state, horse: RacingHorse) {
+    const index = state.horses.findIndex(item => item != horse);
+    state.horses[index] = horse;
+  },
 
-  judgesFetchedFromSocket(state, judges: Judge[]) {
+  judgesFetched(state, judges: Judge[]) {
     state.judges = judges;
   },
 
-  ranksFetchedFromSocket(state, ranks: Rank[]) {
+  ranksFetched(state, ranks: Rank[]) {
     state.ranks = ranks;
   }
 };

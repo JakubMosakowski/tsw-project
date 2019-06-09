@@ -7,13 +7,12 @@
 
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,600,800");
-@import "../../node_modules/bootstrap/scss/bootstrap";
-@import "../../node_modules/bootstrap-vue/src/index";
 @import "assets/colors";
 body {
   font-family: "Montserrat", sans-serif;
   background-color: $primary-color;
   width: 100%;
+  margin: 0;
 }
 .content {
   display: flex;

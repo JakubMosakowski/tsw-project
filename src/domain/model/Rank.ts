@@ -3,4 +3,5 @@ export interface Rank {
   number: number;
   category: string;
   committee: string[];
+  finished: boolean;
 }

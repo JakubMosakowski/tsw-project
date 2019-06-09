@@ -21,21 +21,16 @@ import Component from "vue-class-component";
 import { RacingHorse } from "@/domain/model/Horse";
 import Cell from "@/presentation/commons/components/Cell.vue";
 import CustomButton from "@/presentation/commons/components/CustomButton.vue";
+import { Getter } from "vuex-class";
 @Component({
   components: { CustomButton, Cell }
 })
 export default class Horses extends Vue {
-  horses = Array<RacingHorse>();
-  mounted() {
-    this.$store.watch(
-      (state, getters) => getters.horses,
-      newValue => {
-        this.horses = newValue;
-      }
-    );
-  }
+  //todo add search for horses/judges/ranks
+  @Getter("horses") horses!: RacingHorse[];
+
   created() {
-    this.$store.dispatch("horsesCreated").catch();
+    this.$store.dispatch("fetchHorses").catch();
   }
 
   deleteClicked(horse: RacingHorse) {

@@ -13,6 +13,7 @@ import Component from "vue-class-component";
 import CustomButton from "@/presentation/commons/components/CustomButton.vue";
 import { RacingHorse } from "@/domain/model/Horse";
 import Cell from "@/presentation/commons/components/Cell.vue";
+import { Getter } from "vuex-class";
 
 @Component({
   components: {
@@ -22,9 +23,8 @@ import Cell from "@/presentation/commons/components/Cell.vue";
 })
 export default class HorseReorder extends Vue {
   //TODO add reordering
-  get horses(): RacingHorse[] {
-    return this.$store.getters.horses;
-  }
+  @Getter("horses") horses!: RacingHorse[];
+
   saveClicked() {
     this.$store
       .dispatch("horsesReordered", this.horses)

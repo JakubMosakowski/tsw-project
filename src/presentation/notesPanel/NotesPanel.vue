@@ -16,6 +16,7 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import Cell from "@/presentation/commons/components/Cell.vue";
 import { RacingHorse } from "@/domain/model/Horse";
+import { Getter } from "vuex-class";
 
 @Component({
   components: {
@@ -23,9 +24,14 @@ import { RacingHorse } from "@/domain/model/Horse";
   }
 })
 export default class NotesPanel extends Vue {
-  get horses() {
-    return this.$store.getters.horses;
+  @Getter("horses") horses!: RacingHorse[];
+
+  created() {
+    this.$store.dispatch("fetchHorses").catch();
+    this.$store.dispatch("fetchJudges").catch();
+    this.$store.dispatch("fetchRanks").catch();
   }
+
   clicked(horse: RacingHorse) {
     this.$router.push({ path: `/notes/${horse.id}` });
   }

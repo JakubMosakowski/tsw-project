@@ -20,56 +20,47 @@ export const actions: ActionTree<ContestState, RootState> = {
       dispatch("ranksFetchedFromSocket", data).catch();
     });
   },
-
   homeDestroyed: () => {
     socket.removeAllListeners();
   },
 
   horsesFetchedFromSocket({ commit }, horses: RacingHorse[]) {
-    commit("horsesFetchedFromSocket", horses);
+    commit("horsesFetched", horses);
   },
-  horsesReordered({ commit }, horses: RacingHorse[]) {
-    return new Promise(resolve => {
-      commit("loading");
-      API.reorderHorses(horses)
-        .then(res => {
-          commit("horsesReordered", horses);
-          resolve(res);
-        })
-        .catch(err => {
-          console.log(err);
-          commit("error", err);
-        });
-    });
+  horseUpdated({ commit }, horse: RacingHorse) {
+    commit("horseUpdated", horse);
   },
-  horsesCreated({ commit }) {
-    return new Promise(resolve => {
-      commit("loading");
-      API.getHorses()
-        .then(res => {
-          commit("horsesFetched", res.data);
-          resolve(res);
-        })
-        .catch(err => {
-          commit("error", err);
-        });
-    });
+  async horsesReordered({ commit }, horses: RacingHorse[]) {
+    commit("loading");
+    const { data } = await API.reorderHorses(horses);
+    commit("horsesFetched", data);
   },
-  deleteHorse({ commit }, horse: RacingHorse) {
-    return new Promise(resolve => {
-      API.deleteHorse(horse.id).then(res => {
-        commit("horseDeleted", horse);
-        resolve(res);
-      });
-      resolve();
-    });
+  async fetchHorses({ commit }) {
+    commit("loading");
+    const { data } = await API.getHorses();
+    commit("horsesFetched", data);
+  },
+  async deleteHorse({ commit }, horse: RacingHorse) {
+    commit("loading");
+    await API.deleteHorse(horse.id);
+    commit("horseDeleted", horse);
   },
 
+  async fetchJudges({ commit }) {
+    commit("loading");
+    const { data } = await API.getJudges();
+    commit("judgesFetched", data);
+  },
   judgesFetchedFromSocket({ commit }, judges: Judge[]) {
-    commit("judgesFetchedFromSocket", judges);
+    commit("judgesFetched", judges);
   },
 
+  async fetchRanks({ commit }) {
+    commit("loading");
+    const { data } = await API.getRanks();
+    commit("ranksFetched", data);
+  },
   ranksFetchedFromSocket({ commit }, ranks: Rank[]) {
-    commit("ranksFetchedFromSocket", ranks);
+    commit("ranksFetched", ranks);
   }
 };

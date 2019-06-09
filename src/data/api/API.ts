@@ -7,7 +7,7 @@ const client = axios.create();
 export class API {
   static execute(method: Method, resource: string, data?: any) {
     return client({
-      url: "http://localhost:3002" + resource,
+      url: "https://tsw-project-server.herokuapp.com" + resource,
       data: data,
       method: method
     });
@@ -40,6 +40,14 @@ export class API {
   }
   static deleteHorse(id: string) {
     return API.execute(DELETE, `/horses/${id}`);
+  }
+
+  static getJudges() {
+    return API.execute(GET, "/judges");
+  }
+
+  static getRanks() {
+    return API.execute(GET, "/ranks");
   }
 }
 

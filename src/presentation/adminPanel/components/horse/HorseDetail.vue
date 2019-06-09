@@ -9,6 +9,7 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import CustomButton from "@/presentation/commons/components/CustomButton.vue";
 import { RacingHorse } from "@/domain/model/Horse";
+import { Getter } from "vuex-class";
 
 @Component({
   components: {
@@ -16,10 +17,12 @@ import { RacingHorse } from "@/domain/model/Horse";
   }
 })
 export default class HorseDetail extends Vue {
-  get horse(): RacingHorse | undefined {
-    return this.$store.getters.horses.find(
+  @Getter("horses") horses!: RacingHorse[];
+
+  get horse(): RacingHorse {
+    return this.horses.find(
       (item: RacingHorse) => item.id == this.$route.params.id
-    );
+    )!;
   }
   //todo stwórz wszystkie pola + ustaw im defaul wartość jeżeli jest koń
 }

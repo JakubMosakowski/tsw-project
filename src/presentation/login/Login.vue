@@ -1,7 +1,7 @@
 <template>
   <div class="loginWrapper">
     <h1>Logowanie</h1>
-    <p v-if="authStatus">Wrong login or password!</p>
+    <p v-if="isError">Wrong login or password!</p>
     <label>
       <input v-model="name" required placeholder="Nazwa" />
     </label>
@@ -16,19 +16,16 @@
 import CustomButton from "../commons/components/CustomButton.vue";
 import Vue from "vue";
 import Component from "vue-class-component";
-import { Status } from "@/domain/model/Status";
+import { Getter } from "vuex-class";
 
 @Component({
   components: {
     CustomButton
-  },
-  computed: {
-    authStatus: function() {
-      return this.$store.getters.authStatus == Status.ERROR;
-    }
   }
 })
 export default class Login extends Vue {
+  @Getter("isError") isError!: boolean;
+
   name = "";
   password = "";
 
