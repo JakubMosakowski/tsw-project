@@ -33,7 +33,7 @@ export default class Login extends Vue {
     let name = this.name;
     let password = this.password;
     this.$store
-      .dispatch("login", { name, password })
+      .dispatch("login", { login: name, password })
       .then(() => this.$router.push("/"))
       .catch();
   }

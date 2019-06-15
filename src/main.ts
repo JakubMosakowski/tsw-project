@@ -2,7 +2,6 @@ import Vue from "vue";
 import App from "./presentation/App.vue";
 import router from "./router";
 import store from "./data/store/store";
-import Axios from "axios";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import {
@@ -18,18 +17,14 @@ library.add(faPlus);
 library.add(faSort);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
-Vue.prototype.$http = Axios;
-const token = localStorage.getItem("token");
-if (token) {
-  Vue.prototype.$http.defaults.headers.common["Authorization"] = token;
-}
 Vue.config.productionTip = false;
-
 //TODO PANEL ADMINA:
+//TODO przycisk do odśiweżania bazy
 //todo ekran listy konia (z usuwaniem na iksie)
 //todo przejście do szczegółów konia
 //todo ekran listy judge (z usuwaniem na iksie)
 //todo ekran listy rank (z usuwaniem na iksie)
+//todo loading dodaj na wszystkich ekranach robiacych fetch
 
 //todo ekran dodawania konia
 //todo ekran dodawania judge

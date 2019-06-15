@@ -3,6 +3,7 @@ import { ProfileState } from "@/data/store/modules/profile/profileState";
 import { ActionTree } from "vuex";
 import { User } from "@/domain/model/User";
 import { API } from "@/data/api/API";
+import { removeUserToken, setUserToken } from "@/data/storage/storageManager";
 
 export const actions: ActionTree<ProfileState, RootState> = {
   login({ commit }, user: User) {
@@ -13,20 +14,20 @@ export const actions: ActionTree<ProfileState, RootState> = {
           const { token, user } = res.data;
           const userPayload = { user, token };
 
-          localStorage.setItem("token", token);
+          setUserToken(token);
           commit("authSuccess", userPayload);
           resolve(res);
         })
         .catch(err => {
           commit("authError", err);
-          localStorage.removeItem("token");
+          removeUserToken();
         });
     });
   },
   logout({ commit }) {
     return new Promise(resolve => {
       commit("logout");
-      localStorage.removeItem("token");
+      removeUserToken();
       resolve();
     });
   }

@@ -1,7 +1,9 @@
 import axios, { Method } from "axios";
 import { User } from "@/domain/model/User";
 import { RacingHorse } from "@/domain/model/Horse";
+import { getUserToken } from "@/data/storage/storageManager";
 
+axios.defaults.headers.common["Authorization"] = `Bearer ${getUserToken()}`;
 const client = axios.create();
 
 export class API {
@@ -18,11 +20,9 @@ export class API {
   }
 
   static getHorses() {
-    return API.execute(GET, "/horses");
+    return API.execute(GET, "/api/horses");
   }
-  static getHorse(id: string) {
-    return API.execute(GET, `/horses/${id}`);
-  }
+
   static reorderHorses(horses: RacingHorse[]) {
     const data = {
       horseNumberList: horses.map(item => {
@@ -30,24 +30,27 @@ export class API {
       })
     };
 
-    return API.execute(POST, `/rearrangeHorseNumbers`, data);
+    return API.execute(POST, `/api/horses/rearrangeHorseNumbers`, data);
   }
+
   static createHorse(data: RacingHorse) {
-    return API.execute(POST, "/horses", data);
+    return API.execute(POST, "/api/horses", data);
   }
+
   static updateHorse(id: string, data: RacingHorse) {
-    return API.execute(PUT, `/horses/${id}`, data);
+    return API.execute(PUT, `/api/horses/${id}`, data);
   }
+
   static deleteHorse(id: string) {
-    return API.execute(DELETE, `/horses/${id}`);
+    return API.execute(DELETE, `/api/horses/${id}`);
   }
 
   static getJudges() {
-    return API.execute(GET, "/judges");
+    return API.execute(GET, "/api/judges");
   }
 
   static getRanks() {
-    return API.execute(GET, "/ranks");
+    return API.execute(GET, "/api/ranks");
   }
 }
 

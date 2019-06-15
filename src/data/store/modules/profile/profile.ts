@@ -4,10 +4,11 @@ import { actions } from "./actions";
 import { mutations } from "./mutations";
 import { ProfileState } from "./profileState";
 import { RootState } from "../../store";
+import { getUserToken } from "@/data/storage/storageManager";
 
 export const state: ProfileState = {
   status: undefined,
-  token: localStorage.getItem("token") || ""
+  token: getUserToken() || ""
 };
 
 const namespaced: boolean = false;

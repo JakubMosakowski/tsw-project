@@ -13,7 +13,11 @@ const store: StoreOptions<RootState> = {
     profile,
     contest
   },
-  plugins: [createPersistedState()]
+  plugins: [
+    createPersistedState({
+      paths: ["contest"]
+    })
+  ]
 };
 
 export default new Vuex.Store<RootState>(store);
