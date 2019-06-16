@@ -36,6 +36,16 @@ export const actions: ActionTree<ContestState, RootState> = {
       .filter((item: string) => item != "");
     commit("setError", errors);
   },
+  fetchAll: ({ dispatch, commit }) => {
+    commit("loading");
+    Promise.all([API.getJudges(), API.getHorses(), API.getRanks()])
+      .then(values => {
+        commit("fetchedAll", values);
+      })
+      .catch(e => {
+        dispatch("setError", e).catch();
+      });
+  },
 
   horsesFetchedFromSocket({ commit }, horses: RacingHorse[]) {
     commit("horsesFetched", horses);
@@ -54,13 +64,16 @@ export const actions: ActionTree<ContestState, RootState> = {
   async updateHorse({ dispatch, commit }, horse: RacingHorse) {
     commit("loading");
     const apiHorse = convertHorseToApiVersion(horse);
-    API.updateHorse(horse.id, apiHorse)
-      .then(data => {
-        commit("horseUpdated", data);
-      })
-      .catch(e => {
-        dispatch("setError", e);
-      });
+    return new Promise(resolve => {
+      API.updateHorse(horse.id, apiHorse)
+        .then(data => {
+          commit("horseUpdated", data);
+          resolve();
+        })
+        .catch(e => {
+          dispatch("setError", e);
+        });
+    });
   },
   async deleteHorse({ commit }, horse: RacingHorse) {
     commit("loading");

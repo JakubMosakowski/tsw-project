@@ -24,7 +24,6 @@ Vue.config.productionTip = false;
 //todo przejście do szczegółów konia
 //todo ekran listy judge (z usuwaniem na iksie)
 //todo ekran listy rank (z usuwaniem na iksie)
-//todo loading dodaj na wszystkich ekranach robiacych fetch
 
 //todo ekran dodawania konia
 //todo ekran dodawania judge

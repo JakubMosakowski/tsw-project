@@ -19,16 +19,13 @@
       <div id="sumRight" class="box">{{ sumRight }}</div>
     </div>
     <CustomButton @clicked="save" text="Zapisz" />
-    <p v-for="(e, index) in errors" v-bind:key="JSON.stringify(e) + index">
-      {{ e }}
-    </p>
+    <Error :errors="errors" />
   </div>
 </template>
 <script lang="ts">
 //TODO rozjemca
+//TODO checkbox na ustawianie zakończonych.
 //TODO przenoś do listy koni po akceptacji
-//todo loading przy kazdym requescie ustawiaj
-//TODO wyświetlaj error jeżeli wartości będą niepoprawne (przenies go do osobnej klasy)
 import Vue from "vue";
 import Component from "vue-class-component";
 import CustomButton from "@/presentation/commons/components/CustomButton.vue";
@@ -36,9 +33,11 @@ import { Notes, RacingHorse } from "@/domain/model/Horse";
 import TableHeader from "@/presentation/notesPanel/TableHeader.vue";
 import NotesRow from "@/presentation/notesPanel/NotesRow.vue";
 import { Getter } from "vuex-class";
+import Error from "@/presentation/commons/Error.vue";
 
 @Component({
   components: {
+    Error,
     CustomButton,
     TableHeader,
     NotesRow
@@ -54,7 +53,10 @@ export default class NoteDetail extends Vue {
   }
 
   save() {
-    this.$store.dispatch("updateHorse", this.horse).catch();
+    this.$store
+      .dispatch("updateHorse", this.horse)
+      .then(() => this.$router.push("/notesPanel"))
+      .catch();
   }
 
   valueUpdated(notes: Notes, row: number) {

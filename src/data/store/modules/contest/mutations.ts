@@ -14,9 +14,16 @@ export const mutations: MutationTree<ContestState> = {
     state.status = Status.ERROR;
     state.errors = errors;
   },
+  fetchedAll(state, values) {
+    state.judges = values[0].data;
+    state.horses = values[1].data;
+    state.ranks = values[2].data;
+    state.status = Status.SUCCESS;
+  },
 
   horsesFetched(state, horses: RacingHorse[]) {
     state.horses = horses;
+    state.status = Status.SUCCESS;
   },
   loadingHorses(state) {
     state.horses = [];
@@ -25,14 +32,17 @@ export const mutations: MutationTree<ContestState> = {
   },
   horseDeleted(state, horse: RacingHorse) {
     state.horses = state.horses.filter(item => item != horse);
+    state.status = Status.SUCCESS;
   },
   horseUpdated(state, horse: RacingHorse) {
     const index = state.horses.findIndex(item => item != horse);
     state.horses[index] = horse;
+    state.status = Status.SUCCESS;
   },
 
   judgesFetched(state, judges: Judge[]) {
     state.judges = judges;
+    state.status = Status.SUCCESS;
   },
   loadingJudges(state) {
     state.judges = [];
@@ -42,6 +52,7 @@ export const mutations: MutationTree<ContestState> = {
 
   ranksFetched(state, ranks: Rank[]) {
     state.ranks = ranks;
+    state.status = Status.SUCCESS;
   },
   loadingRanks(state) {
     state.ranks = [];

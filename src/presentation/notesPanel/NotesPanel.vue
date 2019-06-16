@@ -27,9 +27,7 @@ export default class NotesPanel extends Vue {
   @Getter("horses") horses!: RacingHorse[];
 
   created() {
-    this.$store.dispatch("fetchHorses").catch();
-    this.$store.dispatch("fetchJudges").catch();
-    this.$store.dispatch("fetchRanks").catch();
+    this.$store.dispatch("fetchAll").catch();
   }
 
   clicked(horse: RacingHorse) {

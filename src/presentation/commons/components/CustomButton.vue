@@ -72,5 +72,7 @@ export default class CustomButton extends Vue {}
   &:hover {
     background-color: darken($primary-color, 10%);
   }
+
+  font-size: 1rem;
 }
 </style>
