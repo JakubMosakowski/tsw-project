@@ -35,7 +35,8 @@ export const mutations: MutationTree<ContestState> = {
     state.status = Status.SUCCESS;
   },
   horseUpdated(state, horse: RacingHorse) {
-    const index = state.horses.findIndex(item => item != horse);
+    const index = state.horses.findIndex(item => item.id == horse.id);
+
     state.horses[index] = horse;
     state.status = Status.SUCCESS;
   },

@@ -28,6 +28,8 @@ Vue.config.productionTip = false;
 //todo ekran dodawania konia
 //todo ekran dodawania judge
 //todo ekran dodawania rank
+//TODO checkbox na ustawianie zakończonych.
+//todo wystaw stronkę na netlify
 
 //todo ekran edytowania konia
 //todo możliwość przeniesienia konia z klasy do klasy (jakis ladny dropdown do wyboru jednej z klas) przy edycji konia.
@@ -43,8 +45,7 @@ Vue.config.productionTip = false;
 //todo  możliwość obserwowania klasyfikacji w poszczególnych klasach (dane przesyłane „na żywo” przez Websockets – socket.io)
 
 //TODO PANEL PROWADZĄCEGO POKAZ
-//todo Najważniejszy element to wprowadzanie ocen spływających od poszczególnych sędziów (t, g, k, n, r)
-// – każda nota jest liczbą z przedziału [0..20], ze stopniowaniem 0.5.
+//TODO rozjemca
 
 //TODO sprawdz jak dziala na telefonach
 new Vue({

@@ -9,6 +9,7 @@ import Horses from "@/presentation/adminPanel/components/horse/Horses.vue";
 import HorseDetail from "@/presentation/adminPanel/components/horse/HorseDetail.vue";
 import HorseReorder from "@/presentation/adminPanel/components/horse/HorseReorder.vue";
 import NoteDetail from "@/presentation/notesPanel/NoteDetail.vue";
+import JudgingPanel from "@/presentation/notesPanel/JudgingPanel.vue";
 
 Vue.use(Router);
 
@@ -39,6 +40,16 @@ let router = new Router({
       path: "/notesPanel",
       name: "notesPanel",
       component: NotesPanel,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/judgingPanel/:id",
+      name: "judgingPanel",
+      component: JudgingPanel,
+      props: true,
+
       meta: {
         requiresAuth: true
       }

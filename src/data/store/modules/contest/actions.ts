@@ -24,8 +24,8 @@ export const actions: ActionTree<ContestState, RootState> = {
   homeDestroyed: () => {
     socket.removeAllListeners();
   },
-  setError: ({ commit }, e) => {
-    const errors = e.response.data.errors
+  setError: ({ commit }, { response }) => {
+    const errors = response.data.errors
       .map((item: Error) => {
         if (item.msg.toLowerCase() == "invalid value") {
           return "";
@@ -41,6 +41,16 @@ export const actions: ActionTree<ContestState, RootState> = {
     Promise.all([API.getJudges(), API.getHorses(), API.getRanks()])
       .then(values => {
         commit("fetchedAll", values);
+      })
+      .catch(e => {
+        dispatch("setError", e).catch();
+      });
+  },
+  reloadDb: ({ dispatch, commit }) => {
+    commit("loading");
+    API.reloadDb()
+      .then(() => {
+        dispatch("fetchAll").catch();
       })
       .catch(e => {
         dispatch("setError", e).catch();
@@ -66,7 +76,7 @@ export const actions: ActionTree<ContestState, RootState> = {
     const apiHorse = convertHorseToApiVersion(horse);
     return new Promise(resolve => {
       API.updateHorse(horse.id, apiHorse)
-        .then(data => {
+        .then(({ data }) => {
           commit("horseUpdated", data);
           resolve();
         })

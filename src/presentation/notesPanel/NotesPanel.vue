@@ -1,11 +1,11 @@
 <template>
   <div class="notesPanelWrapper">
-    <h1>Konie do oceny:</h1>
-    <div v-for="horse in horses" v-bind:key="horse.index">
+    <h1>Klasy do oceny:</h1>
+    <div v-for="rank in ranks" v-bind:key="rank.index">
       <Cell
-        :label="horse.name"
+        :label="getLabel(rank)"
         :withButtons="false"
-        @cellClicked="clicked(horse)"
+        @cellClicked="clicked(rank)"
       />
     </div>
   </div>
@@ -15,8 +15,8 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import Cell from "@/presentation/commons/components/Cell.vue";
-import { RacingHorse } from "@/domain/model/Horse";
 import { Getter } from "vuex-class";
+import { Rank } from "@/domain/model/Rank";
 
 @Component({
   components: {
@@ -24,14 +24,18 @@ import { Getter } from "vuex-class";
   }
 })
 export default class NotesPanel extends Vue {
-  @Getter("horses") horses!: RacingHorse[];
+  @Getter("ranks") ranks!: Rank[];
 
   created() {
     this.$store.dispatch("fetchAll").catch();
   }
 
-  clicked(horse: RacingHorse) {
-    this.$router.push({ path: `/notes/${horse.id}` });
+  getLabel(rank: Rank): string {
+    return `${rank.category} ${rank.number}`;
+  }
+
+  clicked(rank: Rank) {
+    this.$router.push({ path: `/judgingPanel/${rank.id}` });
   }
 }
 </script>

@@ -23,9 +23,6 @@
   </div>
 </template>
 <script lang="ts">
-//TODO rozjemca
-//TODO checkbox na ustawianie zakończonych.
-//TODO przenoś do listy koni po akceptacji
 import Vue from "vue";
 import Component from "vue-class-component";
 import CustomButton from "@/presentation/commons/components/CustomButton.vue";
@@ -34,6 +31,7 @@ import TableHeader from "@/presentation/notesPanel/TableHeader.vue";
 import NotesRow from "@/presentation/notesPanel/NotesRow.vue";
 import { Getter } from "vuex-class";
 import Error from "@/presentation/commons/Error.vue";
+import { sumAll, sumLeft, sumRight } from "@/presentation/commons/extensions";
 
 @Component({
   components: {
@@ -55,7 +53,9 @@ export default class NoteDetail extends Vue {
   save() {
     this.$store
       .dispatch("updateHorse", this.horse)
-      .then(() => this.$router.push("/notesPanel"))
+      .then(() =>
+        this.$router.push({ path: `/judgingPanel/${this.horse.rank.id}` })
+      )
       .catch();
   }
 
@@ -68,39 +68,15 @@ export default class NoteDetail extends Vue {
   }
 
   get sumLeft(): Number {
-    const numbers = this.notes.map((note: Notes) => note.horseType);
-    return this.sumWithRound(numbers);
+    return sumLeft(this.notes);
   }
 
   get sumRight(): Number {
-    const numbers = this.notes.map((note: Notes) => note.movement);
-    return this.sumWithRound(numbers);
-  }
-
-  sumWithRound(array: number[]): Number {
-    return (
-      Math.round(10 * array.reduce((a: number, b: number) => a + b, 0)) / 10
-    );
+    return sumRight(this.notes);
   }
 
   get sumAll(): Number {
-    const types = this.notes
-      .map((note: Notes) => note.horseType)
-      .reduce((a: number, b: number) => a + b, 0);
-    const heads = this.notes
-      .map((note: Notes) => note.head)
-      .reduce((a: number, b: number) => a + b, 0);
-    const legs = this.notes
-      .map((note: Notes) => note.legs)
-      .reduce((a: number, b: number) => a + b, 0);
-    const logs = this.notes
-      .map((note: Notes) => note.log)
-      .reduce((a: number, b: number) => a + b, 0);
-    const movements = this.notes
-      .map((note: Notes) => note.movement)
-      .reduce((a: number, b: number) => a + b, 0);
-
-    return this.sumWithRound([types, heads, legs, logs, movements]);
+    return sumAll(this.notes);
   }
 }
 </script>

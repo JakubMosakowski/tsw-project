@@ -20,6 +20,10 @@ export class API {
     return API.execute(POST, "/login", user);
   }
 
+  static reloadDb() {
+    return API.execute(POST, "/api/reloadDb");
+  }
+
   static getHorses() {
     return API.execute(GET, "/api/horses");
   }
