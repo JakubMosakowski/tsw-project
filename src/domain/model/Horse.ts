@@ -1,5 +1,6 @@
 import { Human } from "./Human";
 import { Rank } from "./Rank";
+import { Judge } from "@/domain/model/Judge";
 
 export interface RacingHorse extends Horse {
   id: string;
@@ -26,14 +27,16 @@ export interface Lineage {
 }
 
 export interface Notes {
-  type: number;
+  judge: Judge;
+  horseType: number;
   head: number;
   log: number;
   legs: number;
   movement: number;
 }
+
 export enum NoteNumber {
-  TYPE,
+  HORSE_TYPE,
   HEAD,
   LOG,
   LEGS,

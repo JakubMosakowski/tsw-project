@@ -44,8 +44,8 @@ Vue.config.productionTip = false;
 //todo  możliwość obserwowania klasyfikacji w poszczególnych klasach (dane przesyłane „na żywo” przez Websockets – socket.io)
 
 //TODO PANEL PROWADZĄCEGO POKAZ
-//todo Najważniejszy element to wprowadzanie ocen spływających od poszczególnych sędziów (t, g, k, n, r) – każda nota jest liczbą z przedziału [0..20], ze stopniowaniem 0.5.
-//todo logowanie bo stałych passach np. admin admin
+//todo Najważniejszy element to wprowadzanie ocen spływających od poszczególnych sędziów (t, g, k, n, r)
+// – każda nota jest liczbą z przedziału [0..20], ze stopniowaniem 0.5.
 
 //TODO sprawdz jak dziala na telefonach
 new Vue({

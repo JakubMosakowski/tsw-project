@@ -8,13 +8,20 @@ import { Rank } from "@/domain/model/Rank";
 export const mutations: MutationTree<ContestState> = {
   loading(state) {
     state.status = Status.LOADING;
+    state.errors = [];
   },
-  error(state) {
+  setError(state, errors: [Error]) {
     state.status = Status.ERROR;
+    state.errors = errors;
   },
 
   horsesFetched(state, horses: RacingHorse[]) {
     state.horses = horses;
+  },
+  loadingHorses(state) {
+    state.horses = [];
+    state.status = Status.LOADING;
+    state.errors = [];
   },
   horseDeleted(state, horse: RacingHorse) {
     state.horses = state.horses.filter(item => item != horse);
@@ -27,8 +34,18 @@ export const mutations: MutationTree<ContestState> = {
   judgesFetched(state, judges: Judge[]) {
     state.judges = judges;
   },
+  loadingJudges(state) {
+    state.judges = [];
+    state.status = Status.LOADING;
+    state.errors = [];
+  },
 
   ranksFetched(state, ranks: Rank[]) {
     state.ranks = ranks;
+  },
+  loadingRanks(state) {
+    state.ranks = [];
+    state.status = Status.LOADING;
+    state.errors = [];
   }
 };

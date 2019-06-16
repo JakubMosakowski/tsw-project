@@ -2,6 +2,7 @@ import axios, { Method } from "axios";
 import { User } from "@/domain/model/User";
 import { RacingHorse } from "@/domain/model/Horse";
 import { getUserToken } from "@/data/storage/storageManager";
+import { ApiRacingHorse } from "@/domain/model/ApiRacingHorse";
 
 axios.defaults.headers.common["Authorization"] = `Bearer ${getUserToken()}`;
 const client = axios.create();
@@ -33,12 +34,12 @@ export class API {
     return API.execute(POST, `/api/horses/rearrangeHorseNumbers`, data);
   }
 
-  static createHorse(data: RacingHorse) {
+  static createHorse(data: ApiRacingHorse) {
     return API.execute(POST, "/api/horses", data);
   }
 
-  static updateHorse(id: string, data: RacingHorse) {
-    return API.execute(PUT, `/api/horses/${id}`, data);
+  static updateHorse(id: string, horse: ApiRacingHorse) {
+    return API.execute(PUT, `/api/horses/${id}`, horse);
   }
 
   static deleteHorse(id: string) {

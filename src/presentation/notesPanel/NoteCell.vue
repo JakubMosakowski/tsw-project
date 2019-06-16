@@ -1,54 +1,59 @@
 <template>
-  <div class="noteCellWrapper">
-    <p>{{ note }}</p>
-    <CustomButton text="-" @clicked="minusClicked" :isEnabled="canSubtract()" />
-    <CustomButton text="+" @clicked="plusClicked" :isEnabled="canAdd()" />
-  </div>
+  <td class="noteCellWrapper">
+    <label>
+      <input
+        v-model="note"
+        @keypress="validateValue"
+        type="number"
+        step="0.5"
+        max="20"
+        min="0"
+      />
+    </label>
+  </td>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-
 import Component from "vue-class-component";
 import CustomButton from "@/presentation/commons/components/CustomButton.vue";
+import { Watch } from "vue-property-decorator";
+
 @Component({
   components: { CustomButton },
   props: {
-    note: Number
+    initialNote: Number
   }
 })
 export default class NoteCell extends Vue {
-  plusClicked() {
-    this.$emit("plusClicked");
+  note = 0;
+
+  created() {
+    this.note = this.$props.initialNote;
   }
 
-  minusClicked() {
-    this.$emit("minusClicked");
+  validateValue(event: KeyboardEvent) {
+    const note = this.note.toString();
+    const len = note.length;
+
+    if (len == 4) event.preventDefault();
+    if (event.key == "-") event.preventDefault();
   }
 
-  canAdd() {
-    return this.$props.note < 20;
-  }
-  canSubtract() {
-    return this.$props.note > 0;
+  @Watch("note")
+  onChildChanged(val: string) {
+    if (val == "") {
+      val = "0";
+    }
+    this.$emit("valueChanged", val);
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.noteCellWrapper {
-  border: 1px solid black;
-  padding: 5px;
-  margin: 5px;
-  display: flex;
-}
-
-.customButton {
-  padding: 2px;
-  margin: 2px;
-}
-.header {
-  display: flex;
+input {
+  width: 80px;
+  font-size: 1.5rem;
 }
 
 p {

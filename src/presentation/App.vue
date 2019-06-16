@@ -12,6 +12,7 @@ body {
   font-family: "Montserrat", sans-serif;
   background-color: $primary-color;
   width: 100%;
+  font-size: 1rem;
   margin: 0;
 }
 .content {

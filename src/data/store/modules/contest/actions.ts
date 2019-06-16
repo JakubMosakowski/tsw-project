@@ -6,6 +6,7 @@ import { ContestState } from "@/data/store/modules/contest/contestState";
 import { Judge } from "@/domain/model/Judge";
 import { Rank } from "@/domain/model/Rank";
 import { socket } from "@/data/sockets/socketManager";
+import { convertHorseToApiVersion } from "@/domain/model/ApiRacingHorse";
 
 export const actions: ActionTree<ContestState, RootState> = {
   homeCreated: ({ dispatch }) => {
@@ -23,22 +24,43 @@ export const actions: ActionTree<ContestState, RootState> = {
   homeDestroyed: () => {
     socket.removeAllListeners();
   },
+  setError: ({ commit }, e) => {
+    const errors = e.response.data.errors
+      .map((item: Error) => {
+        if (item.msg.toLowerCase() == "invalid value") {
+          return "";
+        } else {
+          return item.msg;
+        }
+      })
+      .filter((item: string) => item != "");
+    commit("setError", errors);
+  },
 
   horsesFetchedFromSocket({ commit }, horses: RacingHorse[]) {
     commit("horsesFetched", horses);
   },
-  horseUpdated({ commit }, horse: RacingHorse) {
-    commit("horseUpdated", horse);
-  },
   async horsesReordered({ commit }, horses: RacingHorse[]) {
     commit("loading");
-    const { data } = await API.reorderHorses(horses);
-    commit("horsesFetched", data);
+    //todo error handling
+    // const { data } = await API.reorderHorses(horses);
+    // commit("horsesFetched", data);
   },
   async fetchHorses({ commit }) {
-    commit("loading");
+    commit("loadingHorses");
     const { data } = await API.getHorses();
     commit("horsesFetched", data);
+  },
+  async updateHorse({ dispatch, commit }, horse: RacingHorse) {
+    commit("loading");
+    const apiHorse = convertHorseToApiVersion(horse);
+    API.updateHorse(horse.id, apiHorse)
+      .then(data => {
+        commit("horseUpdated", data);
+      })
+      .catch(e => {
+        dispatch("setError", e);
+      });
   },
   async deleteHorse({ commit }, horse: RacingHorse) {
     commit("loading");
@@ -47,7 +69,7 @@ export const actions: ActionTree<ContestState, RootState> = {
   },
 
   async fetchJudges({ commit }) {
-    commit("loading");
+    commit("loadingJudges");
     const { data } = await API.getJudges();
     commit("judgesFetched", data);
   },
@@ -56,7 +78,7 @@ export const actions: ActionTree<ContestState, RootState> = {
   },
 
   async fetchRanks({ commit }) {
-    commit("loading");
+    commit("loadingRanks");
     const { data } = await API.getRanks();
     commit("ranksFetched", data);
   },

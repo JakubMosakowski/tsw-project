@@ -5,6 +5,7 @@ import { Rank } from "@/domain/model/Rank";
 
 export interface ContestState {
   status?: Status;
+  errors: Error[];
   horses: RacingHorse[];
   judges: Judge[];
   ranks: Rank[];

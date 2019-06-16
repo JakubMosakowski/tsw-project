@@ -1,14 +1,18 @@
 <template>
-  <div class="notesRowWrapper">
+  <tr class="notesRowWrapper">
     <NoteCell
       v-for="(note, index) in notesAsArray"
-      :note="note"
-      v-bind:key="judge.id + index"
-      @minusClicked="minusClicked(note, index, row)"
-      @plusClicked="plusClicked(note, index, row)"
+      :initialNote="note"
+      v-bind:key="notes.judge.id + index"
+      @valueChanged="
+        note => {
+          valueChanged(index, row, parseFloat(note));
+        }
+      "
     />
-    <p>{{ judge.name + judge.country }}</p>
-  </div>
+
+    <td>{{ notes.judge.name }}</td>
+  </tr>
 </template>
 
 <script lang="ts">
@@ -21,47 +25,39 @@ import NoteCell from "@/presentation/notesPanel/NoteCell.vue";
 @Component({
   props: {
     notes: Object,
-    row: Number,
-    judge: Object
+    row: Number
   },
   components: {
     NoteCell
   }
 })
-//todo w panelu prowadzacego tez rob fetcha przy pokazaniu
-//todo loading przy kazdym requescie ustawiaj
 export default class NotesRow extends Vue {
   get notesAsArray(): Number[] {
     const notes = this.$props.notes as Notes;
-    return [notes.head, notes.legs, notes.log, notes.movement, notes.type];
+    return [notes.horseType, notes.head, notes.log, notes.legs, notes.movement];
   }
 
-  plusClicked(note: number, index: number, row: Number) {
-    const notes = this.updateNote(this.$props.notes as Notes, index, 0.5);
-    this.$emit("valueUpdated", notes, row);
-  }
-
-  minusClicked(note: Number, index: number, row: Number) {
-    const notes = this.updateNote(this.$props.notes as Notes, index, -0.5);
+  valueChanged(index: number, row: Number, note: number) {
+    const notes = this.updateNote(this.$props.notes as Notes, index, note);
     this.$emit("valueUpdated", notes, row);
   }
 
   updateNote(notes: Notes, index: number, value: number): Notes {
     switch (index) {
-      case NoteNumber.TYPE:
-        notes.type = notes.type + value;
+      case NoteNumber.HORSE_TYPE:
+        notes.horseType = value;
         break;
       case NoteNumber.HEAD:
-        notes.head = notes.head + value;
+        notes.head = value;
         break;
       case NoteNumber.LOG:
-        notes.log = notes.log + value;
+        notes.log = value;
         break;
       case NoteNumber.LEGS:
-        notes.legs = notes.legs + value;
+        notes.legs = value;
         break;
       case NoteNumber.MOVEMENT:
-        notes.movement = notes.movement + value;
+        notes.movement = value;
     }
 
     return notes;
@@ -69,9 +65,4 @@ export default class NotesRow extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
-.notesRowWrapper {
-  display: flex;
-  justify-content: left;
-}
-</style>
+<style lang="scss" scoped></style>
