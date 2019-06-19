@@ -1,7 +1,7 @@
 import Vue from "vue";
 import App from "./presentation/App.vue";
 import router from "./router";
-import store from "./data/store/store";
+import store from "./data/store/modules/root/store";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import {
@@ -47,6 +47,7 @@ Vue.config.productionTip = false;
 //TODO PANEL PROWADZĄCEGO POKAZ
 //TODO rozjemca
 
+//TODO sprawdz na innych przegladarkach (firefox/chrome/edge)
 //TODO sprawdz jak dziala na telefonach
 new Vue({
   router,

@@ -32,6 +32,7 @@ import NotesRow from "@/presentation/notesPanel/NotesRow.vue";
 import { Getter } from "vuex-class";
 import Error from "@/presentation/commons/Error.vue";
 import { sumAll, sumLeft, sumRight } from "@/presentation/commons/extensions";
+import { APIError } from "@/domain/model/APIError";
 
 @Component({
   components: {
@@ -42,7 +43,7 @@ import { sumAll, sumLeft, sumRight } from "@/presentation/commons/extensions";
   }
 })
 export default class NoteDetail extends Vue {
-  @Getter errors!: Error[];
+  @Getter errors!: APIError[];
   @Getter horseById!: (id: string) => RacingHorse;
   horse!: RacingHorse;
 

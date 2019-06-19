@@ -1,14 +1,14 @@
-import { RootState } from "@/data/store/store";
 import { ProfileState } from "@/data/store/modules/profile/profileState";
 import { ActionTree } from "vuex";
 import { User } from "@/domain/model/User";
 import { API } from "@/data/api/API";
 import { removeUserToken, setUserToken } from "@/data/storage/storageManager";
+import { RootState } from "@/data/store/modules/root/rootState";
 
 export const actions: ActionTree<ProfileState, RootState> = {
-  login({ commit }, user: User) {
+  login({ dispatch, commit }, user: User) {
     return new Promise(resolve => {
-      commit("authRequest");
+      commit("setLoading", null, { root: true });
       API.login(user)
         .then(res => {
           const { token, user } = res.data;
@@ -16,10 +16,11 @@ export const actions: ActionTree<ProfileState, RootState> = {
 
           setUserToken(token);
           commit("authSuccess", userPayload);
+          commit("setSuccess", null, { root: true });
           resolve(res);
         })
         .catch(err => {
-          commit("authError", err);
+          dispatch("setError", err, { root: true });
           removeUserToken();
         });
     });
@@ -27,6 +28,7 @@ export const actions: ActionTree<ProfileState, RootState> = {
   logout({ commit }) {
     return new Promise(resolve => {
       commit("logout");
+      commit("resetStatus", null, { root: true });
       removeUserToken();
       resolve();
     });

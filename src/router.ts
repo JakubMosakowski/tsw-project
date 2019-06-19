@@ -4,7 +4,7 @@ import Home from "@/presentation/home/Home.vue";
 import AdminsPanel from "@/presentation/adminPanel/AdminPanel.vue";
 import NotesPanel from "@/presentation/notesPanel/NotesPanel.vue";
 import Login from "@/presentation/login/Login.vue";
-import store from "@/data/store/store";
+import store from "@/data/store/modules/root/store";
 import Horses from "@/presentation/adminPanel/components/horse/Horses.vue";
 import HorseDetail from "@/presentation/adminPanel/components/horse/HorseDetail.vue";
 import HorseReorder from "@/presentation/adminPanel/components/horse/HorseReorder.vue";

@@ -26,7 +26,8 @@ import JudgingCell from "@/presentation/notesPanel/JudgingCell.vue";
     JudgingCell
   }
 })
-//todo konie muszą być pokolorowane ( 3 pierwsze miejsca)
+//todo if forbidden to wyloguj
+//todo zmien w serwerze ze wywala po roku token
 //todo jeżeli ilość punktów jest taka sama to muszą być oznaczone dla rozjemcy z mozliwością rozjemania ich)
 export default class JudgingPanel extends Vue {
   @Getter horsesByRank!: (id: string) => RacingHorse[];

@@ -1,7 +1,13 @@
 <template>
-  <div class="judgingCellWrapper" @click="cellClicked">
+  <div
+    class="judgingCellWrapper"
+    :class="{ first: isFirst, second: isSecond, third: isThird }"
+    @click="cellClicked"
+  >
     <h3>{{ index + 1 }}.</h3>
-    <h3 class="label">{{ label }}</h3>
+    <h3 class="label">
+      {{ label }}
+    </h3>
     <p>{{ score }}</p>
   </div>
 </template>
@@ -21,6 +27,19 @@ export default class JudgingCell extends Vue {
   cellClicked() {
     this.$emit("cellClicked");
   }
+
+  get isFirst(): boolean {
+    return this.$props.index == 0;
+  }
+
+  get isSecond(): boolean {
+    return this.$props.index == 1;
+  }
+
+  get isThird(): boolean {
+    return this.$props.index == 2;
+  }
+  //todo daj hoover do wszystkiego klikalnego.
 }
 </script>
 
@@ -40,5 +59,17 @@ export default class JudgingCell extends Vue {
   width: 300px;
   margin-left: 15px;
   text-align: left;
+}
+
+.first {
+  background: gold;
+}
+
+.second {
+  background: white;
+}
+
+.third {
+  background: brown;
 }
 </style>
