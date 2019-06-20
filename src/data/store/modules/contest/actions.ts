@@ -1,19 +1,16 @@
-import { RootState } from "@/data/store/store";
 import { ActionTree } from "vuex";
 import { API } from "@/data/api/API";
 import { RacingHorse } from "@/domain/model/Horse";
 import { ContestState } from "@/data/store/modules/contest/contestState";
-import { Contest } from "@/domain/model/Contest";
 import { Judge } from "@/domain/model/Judge";
 import { Rank } from "@/domain/model/Rank";
 import { socket } from "@/data/sockets/socketManager";
+import { convertHorseToApiVersion } from "@/domain/model/ApiRacingHorse";
+import { RootState } from "@/data/store/modules/root/rootState";
 
 export const actions: ActionTree<ContestState, RootState> = {
   homeCreated: ({ dispatch }) => {
     socket.emit("connected");
-    socket.on("contests", (data: Contest[]) => {
-      dispatch("contestsFetchedFromSocket", data).catch();
-    });
     socket.on("horses", (data: RacingHorse[]) => {
       dispatch("horsesFetchedFromSocket", data).catch();
     });
@@ -24,46 +21,107 @@ export const actions: ActionTree<ContestState, RootState> = {
       dispatch("ranksFetchedFromSocket", data).catch();
     });
   },
-
   homeDestroyed: () => {
     socket.removeAllListeners();
   },
-
-  contestsFetchedFromSocket({ commit }, contests: Contest[]) {
-    commit("contestsFetchedFromSocket", contests);
+  fetchAll: ({ dispatch, commit }) => {
+    commit("setLoading", null, { root: true });
+    Promise.all([API.getJudges(), API.getHorses(), API.getRanks()])
+      .then(values => {
+        commit("fetchedAll", values);
+        commit("setSuccess", null, { root: true });
+      })
+      .catch(e => {
+        dispatch("setError", e, { root: true }).catch();
+      });
+  },
+  reloadDb: ({ dispatch, commit }) => {
+    commit("setLoading", null, { root: true });
+    API.reloadDb()
+      .then(() => {
+        dispatch("fetchAll").catch(e =>
+          dispatch("setError", e, { root: true }).catch()
+        );
+      })
+      .catch(e => {
+        dispatch("setError", e, { root: true }).catch();
+      });
   },
 
+  fetchHorses({ dispatch, commit }) {
+    commit("setLoading", null, { root: true });
+    API.getHorses()
+      .then(data => {
+        commit("horsesFetched", data);
+        commit("setSuccess", null, { root: true });
+      })
+      .catch(e => {
+        dispatch("setError", e, { root: true }).catch();
+      });
+  },
   horsesFetchedFromSocket({ commit }, horses: RacingHorse[]) {
-    commit("horsesFetchedFromSocket", horses);
+    commit("horsesFetched", horses);
   },
-  horsesCreated({ commit }) {
+  horsesReordered({ commit }, horses: RacingHorse[]) {
+    // commit("setLoading", null, { root: true });
+    //todo error handling
+    // const { data } = await API.reorderHorses(horses);
+    // commit("horsesFetched", data);
+  },
+  updateHorse({ dispatch, commit }, horse: RacingHorse) {
+    commit("setLoading", null, { root: true });
+    const apiHorse = convertHorseToApiVersion(horse);
     return new Promise(resolve => {
-      commit("loading");
-      API.getHorses()
-        .then(res => {
-          commit("horsesFetched", res.data);
-          resolve(res);
+      API.updateHorse(horse.id, apiHorse)
+        .then(({ data }) => {
+          commit("horseUpdated", data);
+          commit("setSuccess", null, { root: true });
+          resolve();
         })
-        .catch(err => {
-          commit("error", err);
+        .catch(e => {
+          dispatch("setError", e, { root: true }).catch();
         });
     });
   },
-  deleteHorse({ commit }, horse: RacingHorse) {
-    return new Promise(resolve => {
-      API.deleteHorse(horse.id).then(res => {
+  deleteHorse({ dispatch, commit }, horse: RacingHorse) {
+    commit("setLoading", null, { root: true });
+    API.deleteHorse(horse.id)
+      .then(() => {
         commit("horseDeleted", horse);
-        resolve(res);
+        commit("setSuccess", null, { root: true });
+      })
+      .catch(e => {
+        dispatch("setError", e, { root: true }).catch();
       });
-      resolve();
-    });
   },
 
+  fetchJudges({ dispatch, commit }) {
+    commit("setLoading", null, { root: true });
+    API.getJudges()
+      .then(data => {
+        commit("judgesFetched", data);
+        commit("setSuccess", null, { root: true });
+      })
+      .catch(e => {
+        dispatch("setError", e, { root: true }).catch();
+      });
+  },
   judgesFetchedFromSocket({ commit }, judges: Judge[]) {
-    commit("judgesFetchedFromSocket", judges);
+    commit("judgesFetched", judges);
   },
 
+  fetchRanks({ dispatch, commit }) {
+    commit("setLoading", null, { root: true });
+    API.getRanks()
+      .then(data => {
+        commit("ranksFetched", data);
+        commit("setSuccess", null, { root: true });
+      })
+      .catch(e => {
+        dispatch("setError", e, { root: true }).catch();
+      });
+  },
   ranksFetchedFromSocket({ commit }, ranks: Rank[]) {
-    commit("ranksFetchedFromSocket", ranks);
+    commit("ranksFetched", ranks);
   }
 };

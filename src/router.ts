@@ -4,9 +4,12 @@ import Home from "@/presentation/home/Home.vue";
 import AdminsPanel from "@/presentation/adminPanel/AdminPanel.vue";
 import NotesPanel from "@/presentation/notesPanel/NotesPanel.vue";
 import Login from "@/presentation/login/Login.vue";
-import store from "@/data/store/store";
-import Horses from "@/presentation/adminPanel/components/Horses.vue";
-import HorseDetail from "@/presentation/adminPanel/components/HorseDetail.vue";
+import store from "@/data/store/modules/root/store";
+import Horses from "@/presentation/adminPanel/components/horse/Horses.vue";
+import HorseDetail from "@/presentation/adminPanel/components/horse/HorseDetail.vue";
+import HorseReorder from "@/presentation/adminPanel/components/horse/HorseReorder.vue";
+import NoteDetail from "@/presentation/notesPanel/NoteDetail.vue";
+import JudgingPanel from "@/presentation/notesPanel/JudgingPanel.vue";
 
 Vue.use(Router);
 
@@ -42,9 +45,29 @@ let router = new Router({
       }
     },
     {
-      path: "/contests",
-      name: "contests",
-      component: NotesPanel,
+      path: "/judgingPanel/:id",
+      name: "judgingPanel",
+      component: JudgingPanel,
+      props: true,
+
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/notes/:id",
+      name: "noteDetail",
+      component: NoteDetail,
+      props: true,
+
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/horseReorder",
+      name: "horseReorder",
+      component: HorseReorder,
       meta: {
         requiresAuth: true
       }

@@ -1,23 +1,23 @@
 <template>
   <div class="app">
     <Navbar />
-    <router-view class="content" />
+    <CustomSpinner v-if="isLoading" />
+    <router-view v-show="!isLoading" class="content" />
   </div>
 </template>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,600,800");
-@import "../../node_modules/bootstrap/scss/bootstrap";
-@import "../../node_modules/bootstrap-vue/src/index";
 @import "assets/colors";
 body {
-  font-family: "Montserrat", sans-serif;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif !important;
   background-color: $primary-color;
   width: 100%;
+  font-size: 1rem;
+  margin: 0;
 }
 .content {
   display: flex;
-  max-width: 500px;
+  max-width: 600px;
   flex-direction: column;
   align-items: center;
   margin: 50px auto;
@@ -29,10 +29,28 @@ body {
 import Vue from "vue";
 import Component from "vue-class-component";
 import Navbar from "@/presentation/commons/navbar/Navbar.vue";
+import CustomSpinner from "@/presentation/commons/components/CustomSpinner.vue";
+import { Getter } from "vuex-class";
 @Component({
   components: {
+    CustomSpinner,
     Navbar
   }
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  @Getter isLoading!: boolean;
+
+  mounted() {
+    this.$store.watch(
+      (state, getters) => getters.isUnauthorized,
+      (newValue, oldValue) => {
+        if (newValue !== oldValue && newValue) {
+          this.$store.dispatch("logout").then(() => {
+            this.$router.push("/login");
+          });
+        }
+      }
+    );
+  }
+}
 </script>

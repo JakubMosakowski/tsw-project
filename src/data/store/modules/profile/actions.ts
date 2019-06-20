@@ -1,32 +1,36 @@
-import { RootState } from "@/data/store/store";
 import { ProfileState } from "@/data/store/modules/profile/profileState";
 import { ActionTree } from "vuex";
-import { User } from "@/domain/model/User";
+import { UserData } from "@/domain/model/UserData";
 import { API } from "@/data/api/API";
+import { removeUserToken, setUserData } from "@/data/storage/storageManager";
+import { RootState } from "@/data/store/modules/root/rootState";
 
 export const actions: ActionTree<ProfileState, RootState> = {
-  login({ commit }, user: User) {
+  login({ dispatch, commit }, user: UserData) {
     return new Promise(resolve => {
-      commit("authRequest");
+      commit("setLoading", null, { root: true });
       API.login(user)
         .then(res => {
-          const { token, user } = res.data;
-          const userPayload = { user, token };
+          const { token } = res.data;
+          const userData = new UserData(user.login, token);
+          setUserData(userData);
 
-          localStorage.setItem("token", token);
-          commit("authSuccess", userPayload);
+          commit("authSuccess", userData);
+          commit("setSuccess", null, { root: true });
           resolve(res);
         })
-        .catch(err => {
-          commit("authError", err);
-          localStorage.removeItem("token");
+        .catch(e => {
+          dispatch("setError", e, { root: true });
+          removeUserToken();
         });
     });
   },
+
   logout({ commit }) {
     return new Promise(resolve => {
       commit("logout");
-      localStorage.removeItem("token");
+      commit("resetStatus", null, { root: true });
+      removeUserToken();
       resolve();
     });
   }

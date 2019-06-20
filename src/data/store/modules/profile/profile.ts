@@ -3,11 +3,11 @@ import { getters } from "./getters";
 import { actions } from "./actions";
 import { mutations } from "./mutations";
 import { ProfileState } from "./profileState";
-import { RootState } from "../../store";
+import { getUserData } from "@/data/storage/storageManager";
+import { RootState } from "@/data/store/modules/root/rootState";
 
 export const state: ProfileState = {
-  status: undefined,
-  token: localStorage.getItem("token") || ""
+  user: getUserData()
 };
 
 const namespaced: boolean = false;

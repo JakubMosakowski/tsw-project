@@ -1,8 +1,5 @@
-import { Status } from "@/domain/model/Status";
-import { User } from "@/domain/model/User";
+import { UserData } from "@/domain/model/UserData";
 
 export interface ProfileState {
-  status?: Status;
-  user?: User;
-  token: string;
+  user?: UserData;
 }

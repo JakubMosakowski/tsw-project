@@ -1,7 +1,6 @@
 <template>
   <div class="loginWrapper">
     <h1>Logowanie</h1>
-    <p v-if="authStatus">Wrong login or password!</p>
     <label>
       <input v-model="name" required placeholder="Nazwa" />
     </label>
@@ -9,26 +8,27 @@
       <input v-model="password" required type="password" placeholder="Hasło" />
     </label>
     <CustomButton @clicked="login" text="Zaloguj" />
+    <Error :errors="errors" />
   </div>
 </template>
 
 <script lang="ts">
 import CustomButton from "../commons/components/CustomButton.vue";
+import Error from "../commons/Error.vue";
 import Vue from "vue";
 import Component from "vue-class-component";
-import { Status } from "@/domain/model/Status";
+import { Getter } from "vuex-class";
+import { APIError } from "@/domain/model/APIError";
 
 @Component({
   components: {
-    CustomButton
-  },
-  computed: {
-    authStatus: function() {
-      return this.$store.getters.authStatus == Status.ERROR;
-    }
+    CustomButton,
+    Error
   }
 })
 export default class Login extends Vue {
+  @Getter errors!: APIError[];
+
   name = "";
   password = "";
 
@@ -36,7 +36,7 @@ export default class Login extends Vue {
     let name = this.name;
     let password = this.password;
     this.$store
-      .dispatch("login", { name, password })
+      .dispatch("login", { login: name, password })
       .then(() => this.$router.push("/"))
       .catch();
   }

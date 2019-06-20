@@ -3,11 +3,9 @@ import { getters } from "./getters";
 import { actions } from "./actions";
 import { mutations } from "./mutations";
 import { ContestState } from "./contestState";
-import { RootState } from "../../store";
+import { RootState } from "@/data/store/modules/root/rootState";
 
 export const state: ContestState = {
-  status: undefined,
-  contests: [],
   horses: [],
   judges: [],
   ranks: []
