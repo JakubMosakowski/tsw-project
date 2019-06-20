@@ -1,30 +1,31 @@
 import { ProfileState } from "@/data/store/modules/profile/profileState";
 import { ActionTree } from "vuex";
-import { User } from "@/domain/model/User";
+import { UserData } from "@/domain/model/UserData";
 import { API } from "@/data/api/API";
-import { removeUserToken, setUserToken } from "@/data/storage/storageManager";
+import { removeUserToken, setUserData } from "@/data/storage/storageManager";
 import { RootState } from "@/data/store/modules/root/rootState";
 
 export const actions: ActionTree<ProfileState, RootState> = {
-  login({ dispatch, commit }, user: User) {
+  login({ dispatch, commit }, user: UserData) {
     return new Promise(resolve => {
       commit("setLoading", null, { root: true });
       API.login(user)
         .then(res => {
-          const { token, user } = res.data;
-          const userPayload = { user, token };
+          const { token } = res.data;
+          const userData = new UserData(user.login, token);
+          setUserData(userData);
 
-          setUserToken(token);
-          commit("authSuccess", userPayload);
+          commit("authSuccess", userData);
           commit("setSuccess", null, { root: true });
           resolve(res);
         })
-        .catch(err => {
-          dispatch("setError", err, { root: true });
+        .catch(e => {
+          dispatch("setError", e, { root: true });
           removeUserToken();
         });
     });
   },
+
   logout({ commit }) {
     return new Promise(resolve => {
       commit("logout");

@@ -1,24 +1,18 @@
 import { ActionTree } from "vuex";
 import { UNAUTHORIZED_CODE } from "@/data/api/API";
 import { RootState } from "@/data/store/modules/root/rootState";
-import { APIError } from "@/domain/model/APIError";
 
 export const actions: ActionTree<RootState, RootState> = {
   setError: ({ commit }, { response }) => {
-    if (response.status == UNAUTHORIZED_CODE) {
-      commit("setUnauthorizedError");
-      return;
+    try {
+      if (response.data.status == UNAUTHORIZED_CODE) {
+        commit("setUnauthorizedError");
+        return;
+      }
+      const { errors } = response.data;
+      commit("setApiError", errors);
+    } catch (e) {
+      commit("setApiError", [{ msg: "Coś poszło nie tak" }]);
     }
-
-    const errors = response.data.errors
-      .map((item: APIError) => {
-        if (item.msg.toLowerCase() == "invalid value") {
-          return "";
-        } else {
-          return item.msg;
-        }
-      })
-      .filter((item: string) => item != "");
-    commit("setApiError", errors);
   }
 };

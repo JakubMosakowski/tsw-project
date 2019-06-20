@@ -23,7 +23,7 @@ import { Getter } from "vuex-class";
 
 @Component
 export default class Navbar extends Vue {
-  @Getter("isLoggedIn") isLoggedIn!: Boolean;
+  @Getter isLoggedIn!: Boolean;
 
   logout() {
     this.$store.dispatch("logout").then(() => {

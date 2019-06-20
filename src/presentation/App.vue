@@ -44,7 +44,6 @@ export default class App extends Vue {
     this.$store.watch(
       (state, getters) => getters.isUnauthorized,
       (newValue, oldValue) => {
-        console.log("WATCHER");
         if (newValue !== oldValue && newValue) {
           this.$store.dispatch("logout").then(() => {
             this.$router.push("/login");

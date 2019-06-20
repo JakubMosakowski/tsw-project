@@ -1,11 +1,11 @@
 import axios, { Method } from "axios";
-import { User } from "@/domain/model/User";
+import { UserData } from "@/domain/model/UserData";
 import { RacingHorse } from "@/domain/model/Horse";
 import { getUserToken } from "@/data/storage/storageManager";
 import { ApiRacingHorse } from "@/domain/model/ApiRacingHorse";
 
-axios.defaults.headers.common["Authorization"] = `Bearer ${getUserToken()}`;
 const client = axios.create();
+client.defaults.headers.common["Authorization"] = `Bearer ${getUserToken()}`;
 
 export class API {
   static execute(method: Method, resource: string, data?: any) {
@@ -16,8 +16,8 @@ export class API {
     });
   }
 
-  static login(user: User) {
-    return API.execute(POST, "/login", user);
+  static login(user: UserData) {
+    return API.execute(POST, "/auth/login", user);
   }
 
   static reloadDb() {
