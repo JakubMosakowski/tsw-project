@@ -7,7 +7,6 @@
 
 <script lang="ts">
 import Vue from "vue";
-import _ from "lodash";
 import Component from "vue-class-component";
 
 @Component({
@@ -18,18 +17,7 @@ import Component from "vue-class-component";
     }
   }
 })
-export default class CustomSpinner extends Vue {
-  get computedErrors() {
-    return Object.entries(_.countBy(this.$props.errors)).map(entry => {
-      let key = entry[0];
-      let value = entry[1];
-      if (value == 1) {
-        return key;
-      }
-      return `${value} x ${key}`;
-    });
-  }
-}
+export default class CustomSpinner extends Vue {}
 </script>
 
 <style scoped>

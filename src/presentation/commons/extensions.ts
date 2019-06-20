@@ -1,11 +1,11 @@
 import { Notes } from "@/domain/model/Horse";
 
-export const sumLeft = (notes: Notes[]): Number => {
+export const sumLeft = (notes: Notes[]): number => {
   const numbers = notes.map((note: Notes) => note.horseType);
   return sumWithRound(numbers);
 };
 
-export const sumRight = (notes: Notes[]): Number => {
+export const sumRight = (notes: Notes[]): number => {
   const numbers = notes.map((note: Notes) => note.movement);
   return sumWithRound(numbers);
 };

@@ -7,11 +7,13 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import {
   faEdit,
   faTrash,
+  faFlag,
   faPlus,
   faSort
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faEdit);
+library.add(faFlag);
 library.add(faTrash);
 library.add(faPlus);
 library.add(faSort);
@@ -43,9 +45,6 @@ Vue.config.productionTip = false;
 
 //TODO PANEL KIBICA
 //todo  możliwość obserwowania klasyfikacji w poszczególnych klasach (dane przesyłane „na żywo” przez Websockets – socket.io)
-
-//TODO PANEL PROWADZĄCEGO POKAZ
-//TODO rozjemca
 
 //TODO sprawdz na innych przegladarkach (firefox/chrome/edge)
 //TODO sprawdz jak dziala na telefonach

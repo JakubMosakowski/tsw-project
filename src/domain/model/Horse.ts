@@ -12,6 +12,7 @@ export interface RacingHorse extends Horse {
   breeder: Human;
   owner: Human;
   lineage: Lineage;
+  arbitratorValue: number;
   notes: Notes[];
 }
 

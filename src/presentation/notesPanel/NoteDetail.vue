@@ -14,9 +14,9 @@
     </table>
 
     <div id="sums">
-      <div id="sumLeft" class="box">{{ sumLeft }}</div>
-      <div id="sumAll" class="box">{{ sumAll }}</div>
-      <div id="sumRight" class="box">{{ sumRight }}</div>
+      <div id="sumLeft" class="box">{{ getLeftSum }}</div>
+      <div id="sumAll" class="box">{{ getAllSum }}</div>
+      <div id="sumRight" class="box">{{ getRightSum }}</div>
     </div>
     <CustomButton @clicked="save" text="Zapisz" />
     <Error :errors="errors" />
@@ -46,9 +46,11 @@ export default class NoteDetail extends Vue {
   @Getter errors!: APIError[];
   @Getter horseById!: (id: string) => RacingHorse;
   horse!: RacingHorse;
+  notes: Notes[] = [];
 
   created() {
     this.horse = this.horseById(this.$route.params.id);
+    this.notes = this.horse.notes;
   }
 
   save() {
@@ -61,22 +63,18 @@ export default class NoteDetail extends Vue {
   }
 
   valueUpdated(notes: Notes, row: number) {
-    this.horse.notes[row] = notes;
+    this.notes[row] = notes;
   }
 
-  get notes(): Notes[] {
-    return this.horse.notes;
-  }
-
-  get sumLeft(): Number {
+  get getLeftSum(): Number {
     return sumLeft(this.notes);
   }
 
-  get sumRight(): Number {
+  get getRightSum(): Number {
     return sumRight(this.notes);
   }
 
-  get sumAll(): Number {
+  get getAllSum(): Number {
     return sumAll(this.notes);
   }
 }
