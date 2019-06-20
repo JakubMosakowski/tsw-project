@@ -10,6 +10,7 @@ import HorseDetail from "@/presentation/adminPanel/components/horse/HorseDetail.
 import HorseReorder from "@/presentation/adminPanel/components/horse/HorseReorder.vue";
 import NoteDetail from "@/presentation/notesPanel/NoteDetail.vue";
 import JudgingPanel from "@/presentation/notesPanel/JudgingPanel.vue";
+import FanPanel from "@/presentation/home/FanPanel.vue";
 
 Vue.use(Router);
 
@@ -18,7 +19,21 @@ let router = new Router({
     {
       path: "/",
       name: "home",
-      component: Home
+      component: Home,
+
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/fanPanel/:id",
+      name: "fanPanel",
+      component: FanPanel,
+      props: true,
+
+      meta: {
+        requiresAuth: false
+      }
     },
     {
       path: "/adminPanel",

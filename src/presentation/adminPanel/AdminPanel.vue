@@ -23,15 +23,15 @@ import CustomButton from "@/presentation/commons/components/CustomButton.vue";
 })
 export default class AdminPanel extends Vue {
   horses() {
-    this.$router.push("/horses");
+    this.$router.replace("/horses");
   }
 
   judges() {
-    this.$router.push("/judges");
+    this.$router.replace("/judges");
   }
 
   ranks() {
-    this.$router.push("/ranks");
+    this.$router.replace("/ranks");
   }
 
   reloadDb() {

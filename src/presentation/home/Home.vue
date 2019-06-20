@@ -1,8 +1,13 @@
 <template>
   <div class="homeWrapper">
-    <template v-for="rank in ranks">
-      <p v-bind:key="rank.id + 0"></p>
-    </template>
+    <h1>Klasy do obejrzenia</h1>
+    <div v-for="rank in ranks" v-bind:key="rank.index">
+      <Cell
+        :label="getLabel(rank)"
+        :withButtons="false"
+        @cellClicked="clicked(rank)"
+      />
+    </div>
   </div>
 </template>
 
@@ -11,19 +16,30 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { Rank } from "@/domain/model/Rank";
 import { Getter } from "vuex-class";
-//TODO make better css
-//TODO move all views to separate components
-//TODO fix errors from duplicated indexes
-@Component({})
+import Cell from "@/presentation/commons/components/Cell.vue";
+
+@Component({
+  components: {
+    Cell
+  }
+})
 export default class Home extends Vue {
   @Getter("ranks") ranks!: Rank[];
 
   created() {
-    this.$store.dispatch("homeCreated").catch();
+    this.$store.dispatch("connectToSocket").catch();
+  }
+
+  getLabel(rank: Rank): string {
+    return `${rank.category} ${rank.number}`;
   }
 
   beforeDestroy() {
-    this.$store.dispatch("homeDestroyed").catch();
+    this.$store.dispatch("disconnectFromSocket").catch();
+  }
+
+  clicked(rank: Rank) {
+    this.$router.replace({ path: `/fanPanel/${rank.id}` });
   }
 }
 </script>

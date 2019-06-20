@@ -21,17 +21,15 @@ library.add(faSort);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.config.productionTip = false;
 //TODO PANEL ADMINA:
-//TODO przycisk do odśiweżania bazy
 //todo ekran listy konia (z usuwaniem na iksie)
 //todo przejście do szczegółów konia
-//todo ekran listy judge (z usuwaniem na iksie)
-//todo ekran listy rank (z usuwaniem na iksie)
+//todo ekran listy judge (z usuwaniem na iksie) (z handlowaniem errorów)
+//todo ekran listy rank (z usuwaniem na iksie) (z handlowaniem errorów)
 
 //todo ekran dodawania konia
 //todo ekran dodawania judge
 //todo ekran dodawania rank
 //TODO checkbox na ustawianie zakończonych.
-//todo wystaw stronkę na netlify
 
 //todo ekran edytowania konia
 //todo możliwość przeniesienia konia z klasy do klasy (jakis ladny dropdown do wyboru jednej z klas) przy edycji konia.
@@ -42,10 +40,11 @@ Vue.config.productionTip = false;
 // Możliwość przestawiania w kolejnosci koni [co zmienia im numer].
 // Po kliknieciu w numer - edycja numeru, po zaakceptowaniu enterem zmienia sie kolejnosc na liscie.
 // Po zapisie wysyła się do API.
+//todo wystaw stronkę na netlify.
 
-//TODO PANEL KIBICA
-//todo  możliwość obserwowania klasyfikacji w poszczególnych klasach (dane przesyłane „na żywo” przez Websockets – socket.io)
-
+//TODO opcjonalnie:
+//TODO poprawki cssow
+//TODO szukajka na stronie koni/sędziw/rank/notesPanel/klient
 //TODO sprawdz na innych przegladarkach (firefox/chrome/edge)
 //TODO sprawdz jak dziala na telefonach
 new Vue({

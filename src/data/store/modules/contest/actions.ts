@@ -9,7 +9,7 @@ import { convertHorseToApiVersion } from "@/domain/model/ApiRacingHorse";
 import { RootState } from "@/data/store/modules/root/rootState";
 
 export const actions: ActionTree<ContestState, RootState> = {
-  homeCreated: ({ dispatch }) => {
+  connectToSocket: ({ dispatch }) => {
     socket.emit("connected");
     socket.on("horses", (data: RacingHorse[]) => {
       dispatch("horsesFetchedFromSocket", data).catch();
@@ -21,7 +21,7 @@ export const actions: ActionTree<ContestState, RootState> = {
       dispatch("ranksFetchedFromSocket", data).catch();
     });
   },
-  homeDestroyed: () => {
+  disconnectFromSocket: () => {
     socket.removeAllListeners();
   },
   fetchAll: ({ dispatch, commit }) => {
@@ -51,7 +51,7 @@ export const actions: ActionTree<ContestState, RootState> = {
   fetchHorses({ dispatch, commit }) {
     commit("setLoading", null, { root: true });
     API.getHorses()
-      .then(data => {
+      .then(({ data }) => {
         commit("horsesFetched", data);
         commit("setSuccess", null, { root: true });
       })
@@ -98,7 +98,7 @@ export const actions: ActionTree<ContestState, RootState> = {
   fetchJudges({ dispatch, commit }) {
     commit("setLoading", null, { root: true });
     API.getJudges()
-      .then(data => {
+      .then(({ data }) => {
         commit("judgesFetched", data);
         commit("setSuccess", null, { root: true });
       })
@@ -113,7 +113,7 @@ export const actions: ActionTree<ContestState, RootState> = {
   fetchRanks({ dispatch, commit }) {
     commit("setLoading", null, { root: true });
     API.getRanks()
-      .then(data => {
+      .then(({ data }) => {
         commit("ranksFetched", data);
         commit("setSuccess", null, { root: true });
       })

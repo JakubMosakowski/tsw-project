@@ -46,7 +46,7 @@ export default class App extends Vue {
       (newValue, oldValue) => {
         if (newValue !== oldValue && newValue) {
           this.$store.dispatch("logout").then(() => {
-            this.$router.push("/login");
+            this.$router.replace("/login");
           });
         }
       }

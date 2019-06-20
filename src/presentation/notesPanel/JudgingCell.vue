@@ -5,7 +5,8 @@
       first: isFirst,
       second: isSecond,
       third: isThird,
-      needArbiter: needArbiter
+      needArbiter: needArbiter && !disabled,
+      disabled: disabled
     }"
     @click="cellClicked"
   >
@@ -13,14 +14,16 @@
     <h3 class="label">
       {{ label }}
     </h3>
-    <p>{{ score }}</p>
-    <font-awesome-icon
-      class="icon"
-      v-if="needArbiter"
-      icon="flag"
-      v-on:click.stop="iconClicked"
-      fixed-width
-    />
+    <div class="scoresWrapper">
+      <font-awesome-icon
+        class="icon"
+        v-if="needArbiter"
+        icon="flag"
+        v-on:click.stop="iconClicked"
+        fixed-width
+      />
+      <p class="score">{{ score }}</p>
+    </div>
   </div>
 </template>
 
@@ -34,7 +37,8 @@ import Component from "vue-class-component";
     score: Number,
     index: Number,
     needArbiter: Boolean,
-    hasIcon: Boolean
+    hasIcon: Boolean,
+    disabled: Boolean
   }
 })
 export default class JudgingCell extends Vue {
@@ -62,9 +66,8 @@ export default class JudgingCell extends Vue {
 <style scoped lang="scss">
 .judgingCellWrapper {
   display: flex;
-  padding: 5px;
+  padding: 10px 25px;
   margin: 5px;
-  justify-content: center;
   align-items: center;
   width: 430px;
   border: 1px solid black;
@@ -73,6 +76,11 @@ export default class JudgingCell extends Vue {
     border-radius: 4px;
     cursor: pointer;
   }
+}
+.disabled:hover {
+  border: 1px solid black !important;
+  border-radius: 0 !important;
+  cursor: default !important;
 }
 
 .label {
@@ -95,12 +103,27 @@ export default class JudgingCell extends Vue {
 }
 .icon {
   margin-left: 10px;
+  margin-right: 10px;
   padding: 5px;
+  border: 1px solid transparent;
 }
 
 .icon:hover {
   border: 1px solid gray;
   border-radius: 4px;
   cursor: pointer;
+}
+.needArbiter {
+  border: 3px solid red;
+  border-radius: 4px;
+}
+
+.score {
+  font-weight: bold;
+}
+.scoresWrapper {
+  display: flex;
+  margin-left: auto;
+  align-items: center;
 }
 </style>

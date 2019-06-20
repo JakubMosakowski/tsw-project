@@ -23,11 +23,9 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { Getter } from "vuex-class";
 import { RacingHorse } from "@/domain/model/Horse";
-import { Rank } from "@/domain/model/Rank";
 import { sumAll, sumLeft, sumRight } from "@/presentation/commons/extensions";
 import JudgingCell from "@/presentation/notesPanel/JudgingCell.vue";
 import _ from "lodash";
-
 @Component({
   components: {
     JudgingCell
@@ -35,19 +33,9 @@ import _ from "lodash";
 })
 export default class JudgingPanel extends Vue {
   @Getter horses!: RacingHorse[];
-  @Getter rankById!: (id: string) => Rank;
-  rank!: Rank;
 
   get horsesByRank(): RacingHorse[] {
-    return this.horses.filter(item => item.rank.id == this.rank.id);
-  }
-
-  created() {
-    this.rank = this.rankById(this.$route.params.id);
-  }
-
-  mounted() {
-    this.rank = this.rankById(this.$route.params.id);
+    return this.horses.filter(item => item.rank.id == this.$route.params.id);
   }
 
   getSum(horse: RacingHorse) {
@@ -97,7 +85,7 @@ export default class JudgingPanel extends Vue {
   }
 
   horseClicked(horse: RacingHorse) {
-    this.$router.push({ path: `/notes/${horse.id}` });
+    this.$router.replace({ path: `/notes/${horse.id}` });
   }
 
   iconClicked(horse: RacingHorse) {
@@ -108,16 +96,10 @@ export default class JudgingPanel extends Vue {
   getHigherPlaceArbiterValue(horse: RacingHorse): number {
     const allHorses = this.getAllHorsesScoresInGroup(horse);
     const wantedIndex = allHorses.findIndex(it => it.horse == horse) - 1;
-    console.log(allHorses);
-    console.log(wantedIndex);
     if (wantedIndex >= 0) return allHorses[wantedIndex].horse.arbitratorValue;
     else return horse.arbitratorValue - 1;
   }
 }
 </script>
 
-<style scoped lang="scss">
-.needArbiter {
-  border: 2px solid blue;
-}
-</style>
+<style scoped lang="scss"></style>

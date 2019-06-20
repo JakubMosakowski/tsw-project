@@ -6,11 +6,12 @@ import { ApiRacingHorse } from "@/domain/model/ApiRacingHorse";
 
 const client = axios.create();
 client.defaults.headers.common["Authorization"] = `Bearer ${getUserToken()}`;
+export const APP_URL = "https://tsw-project-server.herokuapp.com";
 
 export class API {
   static execute(method: Method, resource: string, data?: any) {
     return client({
-      url: "https://tsw-project-server.herokuapp.com" + resource,
+      url: APP_URL + resource,
       data: data,
       method: method
     });

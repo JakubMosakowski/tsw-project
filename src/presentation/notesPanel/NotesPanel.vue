@@ -35,7 +35,7 @@ export default class NotesPanel extends Vue {
   }
 
   clicked(rank: Rank) {
-    this.$router.push({ path: `/judgingPanel/${rank.id}` });
+    this.$router.replace({ path: `/judgingPanel/${rank.id}` });
   }
 }
 </script>

@@ -28,7 +28,7 @@ export default class HorseReorder extends Vue {
   saveClicked() {
     this.$store
       .dispatch("horsesReordered", this.horses)
-      .then(() => this.$router.push("/horses"))
+      .then(() => this.$router.replace("/horses"))
       .catch(e => console.log(e));
   }
 }

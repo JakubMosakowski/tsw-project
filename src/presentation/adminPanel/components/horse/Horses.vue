@@ -26,8 +26,7 @@ import { Getter } from "vuex-class";
   components: { CustomButton, Cell }
 })
 export default class Horses extends Vue {
-  //todo add search for horses/judges/ranks
-  @Getter("horses") horses!: RacingHorse[];
+  @Getter horses!: RacingHorse[];
 
   created() {
     this.$store.dispatch("fetchHorses").catch();
@@ -38,15 +37,16 @@ export default class Horses extends Vue {
   }
 
   editClicked(horse: RacingHorse) {
-    this.$router.push({ path: `/horses/${horse.id}` });
+    this.$router.replace({ path: `/horses/${horse.id}` });
   }
+
   plusClicked() {
     //todo idzie w to samo miejsce co edit ale bez id
     console.log("plus");
-    // this.$router.push({ path: `/horses/` });
+    // this.$router.replace({ path: `/horses/` });
   }
   reorderClicked() {
-    this.$router.push({ path: `/horseReorder` });
+    this.$router.replace({ path: `/horseReorder` });
   }
 }
 </script>

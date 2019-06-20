@@ -57,7 +57,7 @@ export default class NoteDetail extends Vue {
     this.$store
       .dispatch("updateHorse", this.horse)
       .then(() =>
-        this.$router.push({ path: `/judgingPanel/${this.horse.rank.id}` })
+        this.$router.replace({ path: `/judgingPanel/${this.horse.rank.id}` })
       )
       .catch();
   }
