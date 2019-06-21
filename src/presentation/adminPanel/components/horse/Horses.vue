@@ -41,9 +41,7 @@ export default class Horses extends Vue {
   }
 
   plusClicked() {
-    //todo idzie w to samo miejsce co edit ale bez id
-    console.log("plus");
-    // this.$router.replace({ path: `/horses/` });
+    this.$router.push({ path: `/horses/new` });
   }
   reorderClicked() {
     this.$router.push({ path: `/horseReorder` });

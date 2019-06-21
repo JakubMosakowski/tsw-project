@@ -44,4 +44,12 @@ export default class Home extends Vue {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.cellWrapper {
+  border-radius: 4px;
+  &:hover {
+    border: 3px solid blue;
+    cursor: pointer;
+  }
+}
+</style>

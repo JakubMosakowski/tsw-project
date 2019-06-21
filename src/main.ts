@@ -21,9 +21,9 @@ library.add(faSort);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.config.productionTip = false;
 //TODO PANEL ADMINA:
-//todo ekran edytowania konia
-//todo możliwość przeniesienia konia z klasy do klasy (jakis ladny dropdown do wyboru jednej z klas) przy edycji konia.
 //todo ekran dodawania konia
+//todo możliwość przeniesienia konia z klasy do klasy (jakis ladny dropdown do wyboru jednej z klas) przy edycji konia.
+//todo ekran edytowania konia
 
 //todo ekran listy judge (z usuwaniem na iksie) (z handlowaniem errorów)
 //todo ekran dodawania judge
