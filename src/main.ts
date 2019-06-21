@@ -21,32 +21,28 @@ library.add(faSort);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.config.productionTip = false;
 //TODO PANEL ADMINA:
-//todo ekran listy konia (z usuwaniem na iksie)
-//todo przejście do szczegółów konia
-//todo ekran listy judge (z usuwaniem na iksie) (z handlowaniem errorów)
-//todo ekran listy rank (z usuwaniem na iksie) (z handlowaniem errorów)
-
-//todo ekran dodawania konia
-//todo ekran dodawania judge
-//todo ekran dodawania rank
-//TODO checkbox na ustawianie zakończonych.
-
 //todo ekran edytowania konia
 //todo możliwość przeniesienia konia z klasy do klasy (jakis ladny dropdown do wyboru jednej z klas) przy edycji konia.
+//todo ekran dodawania konia
+
+//todo ekran listy judge (z usuwaniem na iksie) (z handlowaniem errorów)
+//todo ekran dodawania judge
 //todo ekran edytowania judge
+
+//todo ekran listy rank (z usuwaniem na iksie) (z handlowaniem errorów)
+//todo ekran dodawania rank
 //todo ekran edytowania rank
 //todo możliwość edycji komisji sędziowskich dla poszczególnych klas (zaznaczenie checkboxem kto ma być w komisji) przy edycji klasy.
-//todo możliwość zmiany numerów startowych koni (osobny ekran) - lista od 0 do X. Każdy rząd ma swój numer i swojego konia.
-// Możliwość przestawiania w kolejnosci koni [co zmienia im numer].
-// Po kliknieciu w numer - edycja numeru, po zaakceptowaniu enterem zmienia sie kolejnosc na liscie.
-// Po zapisie wysyła się do API.
-//todo wystaw stronkę na netlify.
+
+//TODO wystaw stronkę na netlify.
 
 //TODO opcjonalnie:
-//TODO poprawki cssow
-//TODO szukajka na stronie koni/sędziw/rank/notesPanel/klient
-//TODO sprawdz na innych przegladarkach (firefox/chrome/edge)
-//TODO sprawdz jak dziala na telefonach
+//todo checkbox na ustawianie zakończonych.
+//todo poprawki cssow
+//todo szukajka na stronie koni/sędziw/rank/notesPanel/klient
+//todo sprawdz na innych przegladarkach (firefox/chrome/edge)
+//todo sprawdz jak dziala na telefonach
+
 new Vue({
   router,
   store,

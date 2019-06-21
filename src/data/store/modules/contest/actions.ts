@@ -62,11 +62,19 @@ export const actions: ActionTree<ContestState, RootState> = {
   horsesFetchedFromSocket({ commit }, horses: RacingHorse[]) {
     commit("horsesFetched", horses);
   },
-  horsesReordered({ commit }, horses: RacingHorse[]) {
-    // commit("setLoading", null, { root: true });
-    //todo error handling
-    // const { data } = await API.reorderHorses(horses);
-    // commit("horsesFetched", data);
+  horsesReordered({ dispatch, commit }, horses: RacingHorse[]) {
+    commit("setLoading", null, { root: true });
+    return new Promise(resolve => {
+      API.reorderHorses(horses)
+        .then(({ data }) => {
+          commit("horsesFetched", data);
+          commit("setSuccess", null, { root: true });
+          resolve();
+        })
+        .catch(e => {
+          dispatch("setError", e, { root: true }).catch();
+        });
+    });
   },
   updateHorse({ dispatch, commit }, horse: RacingHorse) {
     commit("setLoading", null, { root: true });

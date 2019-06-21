@@ -1,6 +1,9 @@
 <template>
   <div class="cellWrapper" @click="cellClicked">
-    <h3>{{ label }}</h3>
+    <div class="textWrapper">
+      <h3 v-if="withIndex" class="number">{{ index }}.</h3>
+      <h3 class="label">{{ label }}</h3>
+    </div>
     <EditAndDelete
       v-if="withButtons"
       @editClicked="editClicked(editClicked)"
@@ -17,6 +20,7 @@ import EditAndDelete from "@/presentation/commons/components/EditAndDelete.vue";
 @Component({
   props: {
     label: String,
+    index: Number,
     withButtons: {
       default: true,
       type: Boolean
@@ -25,6 +29,9 @@ import EditAndDelete from "@/presentation/commons/components/EditAndDelete.vue";
   components: { EditAndDelete }
 })
 export default class Cell extends Vue {
+  get withIndex() {
+    return this.$props.index !== undefined;
+  }
   deleteClicked() {
     this.$emit("deleteClicked");
   }
@@ -50,8 +57,13 @@ export default class Cell extends Vue {
   border: 1px solid black;
 }
 
-h3 {
+.label {
   overflow-wrap: break-word;
   width: 300px;
+  margin-left: 15px;
+}
+
+.textWrapper {
+  display: flex;
 }
 </style>

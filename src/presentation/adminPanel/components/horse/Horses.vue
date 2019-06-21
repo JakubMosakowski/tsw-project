@@ -1,16 +1,16 @@
 <template>
   <div class="horsesWrapper">
     <h1 class="h1">Konie</h1>
+    <div class="header">
+      <CustomButton icon="sort" @clicked="reorderClicked" />
+      <CustomButton icon="plus" @clicked="plusClicked" color="green" />
+    </div>
     <div v-for="horse in horses" :key="horse.id">
       <Cell
         :label="horse.name"
         @editClicked="editClicked(horse)"
         @deleteClicked="deleteClicked(horse)"
       />
-    </div>
-    <div class="footer">
-      <CustomButton icon="sort" @clicked="reorderClicked" />
-      <CustomButton icon="plus" @clicked="plusClicked" color="green" />
     </div>
   </div>
 </template>
@@ -37,7 +37,7 @@ export default class Horses extends Vue {
   }
 
   editClicked(horse: RacingHorse) {
-    this.$router.replace({ path: `/horses/${horse.id}` });
+    this.$router.push({ path: `/horses/${horse.id}` });
   }
 
   plusClicked() {
@@ -46,7 +46,7 @@ export default class Horses extends Vue {
     // this.$router.replace({ path: `/horses/` });
   }
   reorderClicked() {
-    this.$router.replace({ path: `/horseReorder` });
+    this.$router.push({ path: `/horseReorder` });
   }
 }
 </script>
@@ -55,7 +55,7 @@ export default class Horses extends Vue {
 .customButton {
   margin: 5px;
 }
-.footer {
+.header {
   width: 100%;
   display: flex;
   justify-content: space-between;
