@@ -2,7 +2,7 @@
   <label>
     {{ label }}
     <input
-      type="text"
+      :type="type"
       :placeholder="placeholder"
       :value="value"
       @input="valueChange"
@@ -29,12 +29,20 @@ import Component from "vue-class-component";
       type: Number,
       default: 50
     },
+    isNumeric: {
+      type: Boolean,
+      default: false
+    },
     value: String
   }
 })
 export default class TextInput extends Vue {
   valueChange(event: any) {
     this.$emit("update:value", event.target.value);
+  }
+
+  get type(): string {
+    return this.$props.isNumeric ? "number " : "text";
   }
 }
 </script>

@@ -3,7 +3,7 @@ import { API } from "@/data/api/API";
 import { RacingHorse } from "@/domain/model/Horse";
 import { ContestState } from "@/data/store/modules/contest/contestState";
 import { convertJudgeToHuman, Judge } from "@/domain/model/Judge";
-import { Rank } from "@/domain/model/Rank";
+import { Rank, rankToApiRank } from "@/domain/model/Rank";
 import { socket } from "@/data/sockets/socketManager";
 import {
   convertHorsePutToPost,
@@ -165,7 +165,6 @@ export const actions: ActionTree<ContestState, RootState> = {
         });
     });
   },
-
   deleteJudge({ dispatch, commit }, judge: Judge) {
     commit("setLoading", null, { root: true });
     API.deleteJudge(judge.id)
@@ -178,6 +177,21 @@ export const actions: ActionTree<ContestState, RootState> = {
       });
   },
 
+  createRank({ dispatch, commit }, rank: Rank) {
+    commit("setLoading", null, { root: true });
+    const apiRank = rankToApiRank(rank);
+    return new Promise(resolve => {
+      API.createRank(apiRank)
+        .then(({ data }) => {
+          commit("rankCreated", data);
+          commit("setSuccess", null, { root: true });
+          resolve();
+        })
+        .catch(e => {
+          dispatch("setError", e, { root: true }).catch();
+        });
+    });
+  },
   fetchRanks({ dispatch, commit }) {
     commit("setLoading", null, { root: true });
     API.getRanks()
@@ -191,5 +205,31 @@ export const actions: ActionTree<ContestState, RootState> = {
   },
   ranksFetchedFromSocket({ commit }, ranks: Rank[]) {
     commit("ranksFetched", ranks);
+  },
+  updateRank({ dispatch, commit }, rank: Rank) {
+    commit("setLoading", null, { root: true });
+    const apiRank = rankToApiRank(rank);
+    return new Promise(resolve => {
+      API.updateRank(rank.id, apiRank)
+        .then(({ data }) => {
+          commit("rankUpdated", data);
+          commit("setSuccess", null, { root: true });
+          resolve();
+        })
+        .catch(e => {
+          dispatch("setError", e, { root: true }).catch();
+        });
+    });
+  },
+  deleteRank({ dispatch, commit }, rank: Rank) {
+    commit("setLoading", null, { root: true });
+    API.deleteRank(rank.id)
+      .then(() => {
+        commit("rankDeleted", rank);
+        commit("setSuccess", null, { root: true });
+      })
+      .catch(e => {
+        dispatch("setError", e, { root: true }).catch();
+      });
   }
 };

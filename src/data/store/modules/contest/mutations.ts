@@ -43,5 +43,16 @@ export const mutations: MutationTree<ContestState> = {
 
   ranksFetched(state, ranks: Rank[]) {
     state.ranks = ranks;
+  },
+  rankCreated(state, rank: Rank) {
+    state.ranks.push(rank);
+  },
+  rankDeleted(state, rank: Rank) {
+    state.ranks = state.ranks.filter(item => item != rank);
+  },
+  rankUpdated(state, rank: Rank) {
+    const index = state.ranks.findIndex(item => item.id == rank.id);
+
+    state.ranks[index] = rank;
   }
 };

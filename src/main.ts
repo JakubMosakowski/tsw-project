@@ -20,19 +20,12 @@ library.add(faSort);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.config.productionTip = false;
-//TODO PANEL ADMINA:
-//todo error handling na ekranie listy rank
-//todo ekran listy rank (z usuwaniem na iksie) (z handlowaniem errorów)
-//todo możliwość edycji komisji sędziowskich dla poszczególnych klas (zaznaczenie checkboxem kto ma być w komisji) przy edycji klasy.
-//todo ekran dodawania rank
-//todo ekran edytowania rank
-
-//TODO wystaw stronkę na netlify.
+//TODO sprawdz czy działa ta zakończona klasa
+//TODO niech wera all testuje na netlify
 
 //TODO opcjonalnie:
-//todo checkbox na ustawianie zakończonych.
-//todo poprawki cssow
 //todo szukajka na stronie koni/sędziw/rank/notesPanel/klient
+//todo poprawki cssow
 //todo sprawdz na innych przegladarkach (firefox/chrome/edge)
 //todo sprawdz jak dziala na telefonach
 
