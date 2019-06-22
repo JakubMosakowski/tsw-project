@@ -5,7 +5,7 @@
       <TableHeader />
       <template v-for="(note, index) in notes">
         <NotesRow
-          v-bind:key="note.judge.id"
+          :key="note.judge.id"
           :notes="note"
           :row="index"
           @valueUpdated="valueUpdated"
@@ -44,12 +44,13 @@ import { APIError } from "@/domain/model/APIError";
 })
 export default class NoteDetail extends Vue {
   @Getter errors!: APIError[];
-  @Getter horseById!: (id: string) => RacingHorse;
   horse!: RacingHorse;
   notes: Notes[] = [];
 
   created() {
-    this.horse = this.horseById(this.$route.params.id);
+    this.horse = this.$store.state.contest.horses.find(
+      (it: RacingHorse) => it.id == this.$route.params.id
+    );
     this.notes = this.horse.notes;
   }
 

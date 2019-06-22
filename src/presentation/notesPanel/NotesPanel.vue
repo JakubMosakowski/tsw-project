@@ -1,7 +1,7 @@
 <template>
   <div class="notesPanelWrapper">
     <h1>Klasy do oceny:</h1>
-    <div v-for="rank in ranks" v-bind:key="rank.index">
+    <div v-for="rank in ranks" :key="rank.index">
       <Cell
         :label="getLabel(rank)"
         :withButtons="false"

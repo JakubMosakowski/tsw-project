@@ -5,7 +5,7 @@
       Jeżeli jest remis, arbiter może kliknąć na flagę tego konia który powinien
       być wyżej.
     </p>
-    <div v-for="(horse, index) in horsesSorted" v-bind:key="index">
+    <div v-for="(horse, index) in horsesSorted" :key="index">
       <JudgingCell
         :needArbiter="needArbiter(horse)"
         :label="horse.name"

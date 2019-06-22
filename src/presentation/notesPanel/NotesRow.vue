@@ -3,10 +3,10 @@
     <NoteCell
       v-for="(note, index) in notesAsArray"
       :initialNote="note"
-      v-bind:key="notes.judge.id + index"
+      :key="notes.judge.id + index"
       @valueChanged="
-        note => {
-          valueChanged(index, row, parseFloat(note));
+        updatedNote => {
+          valueChanged(index, row, parseFloat(updatedNote));
         }
       "
     />

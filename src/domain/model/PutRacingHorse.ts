@@ -1,8 +1,7 @@
 import { Human } from "@/domain/model/Human";
 import { Horse, Lineage, RacingHorse } from "@/domain/model/Horse";
 
-export interface ApiRacingHorse extends Horse {
-  number: number;
+export interface PutRacingHorse extends Horse {
   rank: string;
   yearOfBirth: number;
   color: string;
@@ -11,6 +10,16 @@ export interface ApiRacingHorse extends Horse {
   owner: Human;
   lineage: Lineage;
   notes: ApiNotes[];
+}
+
+export interface PostRacingHorse extends Horse {
+  rank: string;
+  yearOfBirth: number;
+  color: string;
+  sex: string;
+  breeder: Human;
+  owner: Human;
+  lineage: Lineage;
 }
 
 export interface ApiNotes {
@@ -22,9 +31,9 @@ export interface ApiNotes {
   movement: number;
 }
 
-export const convertHorseToApiVersion = (
+export const convertHorseToPutVersion = (
   horse: RacingHorse
-): ApiRacingHorse => {
+): PutRacingHorse => {
   let apiHorse = JSON.parse(JSON.stringify(horse));
   apiHorse.rank = horse.rank.id;
   apiHorse.notes = horse.notes.map(item => {
@@ -40,6 +49,17 @@ export const convertHorseToApiVersion = (
 
   delete apiHorse.id;
   delete apiHorse.number;
+
+  return apiHorse;
+};
+
+export const convertHorsePutToPost = (
+  horse: PutRacingHorse
+): PostRacingHorse => {
+  let apiHorse = JSON.parse(JSON.stringify(horse));
+
+  delete apiHorse.notes;
+  delete apiHorse.arbitratorValue;
 
   return apiHorse;
 };

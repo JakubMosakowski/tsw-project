@@ -19,7 +19,7 @@
         class="icon"
         v-if="needArbiter"
         icon="flag"
-        v-on:click.stop="iconClicked"
+        @click.stop="iconClicked"
         fixed-width
       />
       <p class="score">{{ score }}</p>

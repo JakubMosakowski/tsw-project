@@ -5,7 +5,10 @@ import { ContestState } from "@/data/store/modules/contest/contestState";
 import { Judge } from "@/domain/model/Judge";
 import { Rank } from "@/domain/model/Rank";
 import { socket } from "@/data/sockets/socketManager";
-import { convertHorseToApiVersion } from "@/domain/model/ApiRacingHorse";
+import {
+  convertHorsePutToPost,
+  convertHorseToPutVersion
+} from "@/domain/model/PutRacingHorse";
 import { RootState } from "@/data/store/modules/root/rootState";
 
 export const actions: ActionTree<ContestState, RootState> = {
@@ -48,6 +51,21 @@ export const actions: ActionTree<ContestState, RootState> = {
       });
   },
 
+  createHorse({ dispatch, commit }, horse: RacingHorse) {
+    commit("setLoading", null, { root: true });
+    const putHorse = convertHorseToPutVersion(horse);
+    return new Promise(resolve => {
+      API.createHorse(convertHorsePutToPost(putHorse))
+        .then(({ data }) => {
+          commit("horseCreated", data);
+          commit("setSuccess", null, { root: true });
+          resolve();
+        })
+        .catch(e => {
+          dispatch("setError", e, { root: true }).catch();
+        });
+    });
+  },
   fetchHorses({ dispatch, commit }) {
     commit("setLoading", null, { root: true });
     API.getHorses()
@@ -78,7 +96,7 @@ export const actions: ActionTree<ContestState, RootState> = {
   },
   updateHorse({ dispatch, commit }, horse: RacingHorse) {
     commit("setLoading", null, { root: true });
-    const apiHorse = convertHorseToApiVersion(horse);
+    const apiHorse = convertHorseToPutVersion(horse);
     return new Promise(resolve => {
       API.updateHorse(horse.id, apiHorse)
         .then(({ data }) => {

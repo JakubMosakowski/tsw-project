@@ -1,9 +1,6 @@
 <template>
   <div class="errorsWrapper">
-    <p
-      v-for="(e, index) in computedErrors"
-      v-bind:key="JSON.stringify(e) + index"
-    >
+    <p v-for="(e, index) in computedErrors" :key="JSON.stringify(e) + index">
       {{ e }}
     </p>
   </div>

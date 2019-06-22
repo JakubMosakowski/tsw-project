@@ -2,7 +2,7 @@
   <button
     :disabled="!isEnabled"
     class="button customButton"
-    :class="color"
+    :class="[{ disabled: !isEnabled }, color]"
     @click="$emit('clicked')"
   >
     <font-awesome-icon v-if="icon" :icon="icon" fixed-width />
@@ -57,6 +57,13 @@ export default class CustomButton extends Vue {}
   &:hover {
     background: darken(green, 10%) !important;
     border-color: darken(green, 10%) !important;
+  }
+}
+.disabled {
+  background: gray !important;
+  border: 1px solid black !important;
+  &:hover {
+    cursor: default;
   }
 }
 

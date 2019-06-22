@@ -1,7 +1,7 @@
 <template>
   <div class="homeWrapper">
     <h1>Klasy do obejrzenia</h1>
-    <div v-for="rank in ranks" v-bind:key="rank.index">
+    <div v-for="rank in ranks" :key="rank.index">
       <Cell
         :label="getLabel(rank)"
         :withButtons="false"

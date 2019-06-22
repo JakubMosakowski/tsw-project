@@ -14,6 +14,10 @@ export const mutations: MutationTree<ContestState> = {
   horsesFetched(state, horses: RacingHorse[]) {
     state.horses = horses;
   },
+  horseCreated(state, horse: RacingHorse) {
+    state.horses.push(horse);
+  },
+
   horseDeleted(state, horse: RacingHorse) {
     state.horses = state.horses.filter(item => item != horse);
   },

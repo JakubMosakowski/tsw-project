@@ -1,6 +1,6 @@
 <template>
   <div class="fanPanelWrapper">
-    <div v-for="(horse, index) in horsesSorted" v-bind:key="index">
+    <div v-for="(horse, index) in horsesSorted" :key="index">
       <JudgingCell
         :label="horse.name"
         :index="index"
