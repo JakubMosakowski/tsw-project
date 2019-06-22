@@ -40,6 +40,7 @@ import _ from "lodash";
 import Error from "@/presentation/commons/Error.vue";
 import { APIError } from "@/domain/model/APIError";
 import { Getter } from "vuex-class";
+import { validateAllValues } from "@/presentation/commons/extensions";
 
 @Component({
   components: {
@@ -152,11 +153,7 @@ export default class HorseDetail extends Vue {
   }
 
   get isClickable() {
-    return Object.keys(this.$data).every(key => {
-      const item = this.$data[key];
-
-      return item != "" && item != 0;
-    });
+    return validateAllValues(this.$data);
   }
 
   save() {
@@ -165,7 +162,9 @@ export default class HorseDetail extends Vue {
     );
     if (horse) {
       horse = this.updateHorseValues(horse);
-      this.$store.dispatch("updateHorse", horse).catch();
+      this.$store.dispatch("updateHorse", horse).then(() => {
+        this.$router.replace("/horses");
+      });
 
       return;
     }

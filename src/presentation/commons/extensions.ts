@@ -33,3 +33,11 @@ export const sumAll = (notes: Notes[]): number => {
 
   return sumWithRound([types, heads, legs, logs, movements]);
 };
+
+export const validateAllValues = (data: any): boolean => {
+  return Object.keys(data).every(key => {
+    const item = data[key];
+
+    return item != "" && item != 0;
+  });
+};

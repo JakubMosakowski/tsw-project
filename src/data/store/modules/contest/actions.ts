@@ -2,7 +2,7 @@ import { ActionTree } from "vuex";
 import { API } from "@/data/api/API";
 import { RacingHorse } from "@/domain/model/Horse";
 import { ContestState } from "@/data/store/modules/contest/contestState";
-import { Judge } from "@/domain/model/Judge";
+import { convertJudgeToHuman, Judge } from "@/domain/model/Judge";
 import { Rank } from "@/domain/model/Rank";
 import { socket } from "@/data/sockets/socketManager";
 import {
@@ -121,6 +121,21 @@ export const actions: ActionTree<ContestState, RootState> = {
       });
   },
 
+  createJudge({ dispatch, commit }, judge: Judge) {
+    commit("setLoading", null, { root: true });
+    const human = convertJudgeToHuman(judge);
+    return new Promise(resolve => {
+      API.createJudge(human)
+        .then(({ data }) => {
+          commit("judgeCreated", data);
+          commit("setSuccess", null, { root: true });
+          resolve();
+        })
+        .catch(e => {
+          dispatch("setError", e, { root: true }).catch();
+        });
+    });
+  },
   fetchJudges({ dispatch, commit }) {
     commit("setLoading", null, { root: true });
     API.getJudges()
@@ -134,6 +149,33 @@ export const actions: ActionTree<ContestState, RootState> = {
   },
   judgesFetchedFromSocket({ commit }, judges: Judge[]) {
     commit("judgesFetched", judges);
+  },
+  updateJudge({ dispatch, commit }, judge: Judge) {
+    commit("setLoading", null, { root: true });
+    const human = convertJudgeToHuman(judge);
+    return new Promise(resolve => {
+      API.updateJudge(judge.id, human)
+        .then(({ data }) => {
+          commit("judgeUpdated", data);
+          commit("setSuccess", null, { root: true });
+          resolve();
+        })
+        .catch(e => {
+          dispatch("setError", e, { root: true }).catch();
+        });
+    });
+  },
+
+  deleteJudge({ dispatch, commit }, judge: Judge) {
+    commit("setLoading", null, { root: true });
+    API.deleteJudge(judge.id)
+      .then(() => {
+        commit("judgeDeleted", judge);
+        commit("setSuccess", null, { root: true });
+      })
+      .catch(e => {
+        dispatch("setError", e, { root: true }).catch();
+      });
   },
 
   fetchRanks({ dispatch, commit }) {

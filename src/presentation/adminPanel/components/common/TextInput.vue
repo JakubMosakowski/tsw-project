@@ -27,7 +27,7 @@ import Component from "vue-class-component";
     },
     maxLength: {
       type: Number,
-      default: 15
+      default: 50
     },
     value: String
   }

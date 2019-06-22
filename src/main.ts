@@ -21,14 +21,11 @@ library.add(faSort);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.config.productionTip = false;
 //TODO PANEL ADMINA:
-//todo ekran listy judge (z usuwaniem na iksie) (z handlowaniem errorów)
-//todo ekran dodawania judge
-//todo ekran edytowania judge
-
+//todo error handling na ekranie listy rank
 //todo ekran listy rank (z usuwaniem na iksie) (z handlowaniem errorów)
+//todo możliwość edycji komisji sędziowskich dla poszczególnych klas (zaznaczenie checkboxem kto ma być w komisji) przy edycji klasy.
 //todo ekran dodawania rank
 //todo ekran edytowania rank
-//todo możliwość edycji komisji sędziowskich dla poszczególnych klas (zaznaczenie checkboxem kto ma być w komisji) przy edycji klasy.
 
 //TODO wystaw stronkę na netlify.
 

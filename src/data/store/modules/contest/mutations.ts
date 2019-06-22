@@ -17,7 +17,6 @@ export const mutations: MutationTree<ContestState> = {
   horseCreated(state, horse: RacingHorse) {
     state.horses.push(horse);
   },
-
   horseDeleted(state, horse: RacingHorse) {
     state.horses = state.horses.filter(item => item != horse);
   },
@@ -29,6 +28,17 @@ export const mutations: MutationTree<ContestState> = {
 
   judgesFetched(state, judges: Judge[]) {
     state.judges = judges;
+  },
+  judgeCreated(state, judge: Judge) {
+    state.judges.push(judge);
+  },
+  judgeDeleted(state, judge: Judge) {
+    state.judges = state.judges.filter(item => item != judge);
+  },
+  judgeUpdated(state, judge: Judge) {
+    const index = state.judges.findIndex(item => item.id == judge.id);
+
+    state.judges[index] = judge;
   },
 
   ranksFetched(state, ranks: Rank[]) {

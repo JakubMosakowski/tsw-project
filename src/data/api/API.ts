@@ -3,6 +3,7 @@ import { UserData } from "@/domain/model/UserData";
 import { RacingHorse } from "@/domain/model/Horse";
 import { getUserToken } from "@/data/storage/storageManager";
 import { PostRacingHorse, PutRacingHorse } from "@/domain/model/PutRacingHorse";
+import { Human } from "@/domain/model/Human";
 
 const client = axios.create();
 client.defaults.headers.common["Authorization"] = `Bearer ${getUserToken()}`;
@@ -53,6 +54,18 @@ export class API {
 
   static getJudges() {
     return API.execute(GET, "/api/judges");
+  }
+
+  static createJudge(data: Human) {
+    return API.execute(POST, "/api/judges", data);
+  }
+
+  static updateJudge(id: string, judge: Human) {
+    return API.execute(PUT, `/api/judges/${id}`, judge);
+  }
+
+  static deleteJudge(id: string) {
+    return API.execute(DELETE, `/api/judges/${id}`);
   }
 
   static getRanks() {
