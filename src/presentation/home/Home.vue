@@ -43,7 +43,7 @@ export default class Home extends Vue {
     return rank.finished ? "medal" : null;
   }
 
-  created() {
+  mounted() {
     this.$store.dispatch("connectToSocket").catch();
   }
 

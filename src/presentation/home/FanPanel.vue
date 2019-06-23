@@ -31,7 +31,7 @@ export default class FanPanel extends Vue {
     return this.horses.filter(item => item.rank.id == this.$route.params.id);
   }
 
-  created() {
+  mounted() {
     this.$store.dispatch("connectToSocket").catch();
   }
 
