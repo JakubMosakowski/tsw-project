@@ -1,12 +1,8 @@
 <template>
   <div class="loginWrapper">
     <h1>Logowanie</h1>
-    <label>
-      <input v-model="name" required placeholder="Nazwa" />
-    </label>
-    <label>
-      <input v-model="password" required type="password" placeholder="Hasło" />
-    </label>
+    <TextInput placeholder="Login" :value.sync="name" />
+    <TextInput placeholder="Hasło" :value.sync="password" />
     <CustomButton @clicked="login" text="Zaloguj" />
     <Error :errors="errors" />
   </div>
@@ -19,9 +15,11 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { Getter } from "vuex-class";
 import { APIError } from "@/domain/model/APIError";
+import TextInput from "@/presentation/adminPanel/components/common/TextInput.vue";
 
 @Component({
   components: {
+    TextInput,
     CustomButton,
     Error
   }
@@ -48,20 +46,11 @@ h1 {
   text-align: center;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
+.textInputWrapper {
+  width: 60%;
 }
 
 .loginWrapper {
   padding: 10px;
-}
-
-p {
-  color: red;
-}
-
-input {
-  margin: 10px;
 }
 </style>

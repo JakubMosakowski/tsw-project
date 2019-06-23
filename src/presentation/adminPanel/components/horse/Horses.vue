@@ -5,7 +5,8 @@
       <CustomButton icon="sort" @clicked="reorderClicked" />
       <CustomButton icon="plus" @clicked="plusClicked" color="green" />
     </div>
-    <div v-for="horse in horses" :key="horse.id">
+    <TextInput placeholder="Szukaj" :value.sync="horseName" />
+    <div v-for="horse in localHorses" :key="horse.id">
       <Cell
         :label="horse.name"
         @editClicked="editClicked(horse)"
@@ -22,11 +23,20 @@ import { RacingHorse } from "@/domain/model/Horse";
 import Cell from "@/presentation/commons/components/Cell.vue";
 import CustomButton from "@/presentation/commons/components/CustomButton.vue";
 import { Getter } from "vuex-class";
+import TextInput from "@/presentation/adminPanel/components/common/TextInput.vue";
 @Component({
-  components: { CustomButton, Cell }
+  components: { TextInput, CustomButton, Cell }
 })
 export default class Horses extends Vue {
   @Getter horses!: RacingHorse[];
+
+  horseName = "";
+
+  get localHorses(): RacingHorse[] {
+    return this.horses.filter(horse =>
+      horse.name.toLowerCase().includes(this.horseName.toLowerCase())
+    );
+  }
 
   created() {
     this.$store.dispatch("fetchHorses").catch();

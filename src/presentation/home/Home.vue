@@ -1,12 +1,15 @@
 <template>
   <div class="homeWrapper">
     <h1>Klasy do obejrzenia</h1>
-    <div v-for="rank in ranks" :key="rank.index">
+    <TextInput placeholder="Szukaj" :value.sync="rankName" />
+    <div class="cell" v-for="rank in localRanks" :key="rank.index">
       <Cell
         :label="getLabel(rank)"
         :withButtons="false"
         @cellClicked="clicked(rank)"
       />
+      <font-awesome-icon v-if="rank.finished" icon="medal" size="lg" />
+      <div v-else class="filler"></div>
     </div>
   </div>
 </template>
@@ -14,24 +17,35 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import { Rank } from "@/domain/model/Rank";
+import { getRankName, Rank } from "@/domain/model/Rank";
 import { Getter } from "vuex-class";
 import Cell from "@/presentation/commons/components/Cell.vue";
+import TextInput from "@/presentation/adminPanel/components/common/TextInput.vue";
 
 @Component({
   components: {
+    TextInput,
     Cell
   }
 })
 export default class Home extends Vue {
   @Getter("ranks") ranks!: Rank[];
+  rankName = "";
+
+  get localRanks(): Rank[] {
+    return this.ranks.filter(rank =>
+      this.getLabel(rank)
+        .toLowerCase()
+        .includes(this.rankName.toLowerCase())
+    );
+  }
 
   created() {
     this.$store.dispatch("connectToSocket").catch();
   }
 
   getLabel(rank: Rank): string {
-    return `${rank.category} ${rank.number}`;
+    return getRankName(rank);
   }
 
   beforeDestroy() {
@@ -39,7 +53,7 @@ export default class Home extends Vue {
   }
 
   clicked(rank: Rank) {
-    this.$router.replace({ path: `/fanPanel/${rank.id}` });
+    this.$router.push({ path: `/fanPanel/${rank.id}` });
   }
 }
 </script>
@@ -51,5 +65,12 @@ export default class Home extends Vue {
     border: 3px solid blue;
     cursor: pointer;
   }
+}
+.cell {
+  display: flex;
+  align-items: center;
+}
+.filler {
+  width: 21.33px;
 }
 </style>

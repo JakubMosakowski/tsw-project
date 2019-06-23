@@ -1,7 +1,8 @@
 <template>
   <div class="notesPanelWrapper">
     <h1>Klasy do oceny:</h1>
-    <div v-for="rank in ranks" :key="rank.index">
+    <TextInput placeholder="Szukaj" :value.sync="rankName" />
+    <div v-for="rank in localRanks" :key="rank.index">
       <Cell
         :label="getLabel(rank)"
         :withButtons="false"
@@ -16,28 +17,47 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import Cell from "@/presentation/commons/components/Cell.vue";
 import { Getter } from "vuex-class";
-import { Rank } from "@/domain/model/Rank";
+import { getRankName, Rank } from "@/domain/model/Rank";
+import TextInput from "@/presentation/adminPanel/components/common/TextInput.vue";
 
 @Component({
   components: {
+    TextInput,
     Cell
   }
 })
 export default class NotesPanel extends Vue {
   @Getter("ranks") ranks!: Rank[];
+  rankName = "";
 
   created() {
     this.$store.dispatch("fetchAll").catch();
   }
 
+  get localRanks(): Rank[] {
+    return this.ranks.filter(rank =>
+      this.getLabel(rank)
+        .toLowerCase()
+        .includes(this.rankName.toLowerCase())
+    );
+  }
+
   getLabel(rank: Rank): string {
-    return `${rank.category} ${rank.number}`;
+    return getRankName(rank);
   }
 
   clicked(rank: Rank) {
-    this.$router.replace({ path: `/judgingPanel/${rank.id}` });
+    this.$router.push({ path: `/judgingPanel/${rank.id}` });
   }
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.cellWrapper {
+  &:hover {
+    border-radius: 4px;
+    border: 3px solid blue;
+    cursor: pointer;
+  }
+}
+</style>

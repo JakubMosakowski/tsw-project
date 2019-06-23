@@ -1,5 +1,5 @@
 <template>
-  <label>
+  <label class="textInputWrapper">
     {{ label }}
     <input
       :type="type"
@@ -59,7 +59,7 @@ input {
   border: 1px solid black;
   border-radius: 4px;
   font-size: 1rem;
-  width: 90%;
+  width: 95%;
   &:hover {
     border: 3px solid blue;
     cursor: text;

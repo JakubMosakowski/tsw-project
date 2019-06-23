@@ -2,8 +2,10 @@
   <div class="judgesWrapper">
     <h1 class="h1">Sędziowie</h1>
     <CustomButton icon="plus" @clicked="plusClicked" color="green" />
+    <TextInput placeholder="Szukaj" :value.sync="judgeName" />
     <Error :errors="errors" />
-    <div v-for="judge in judges" :key="judge.id">
+
+    <div v-for="judge in localJudges" :key="judge.id">
       <Cell
         :label="judge.name"
         @editClicked="editClicked(judge)"
@@ -22,12 +24,21 @@ import { Getter } from "vuex-class";
 import { Judge } from "@/domain/model/Judge";
 import { APIError } from "@/domain/model/APIError";
 import Error from "@/presentation/commons/Error.vue";
+import TextInput from "@/presentation/adminPanel/components/common/TextInput.vue";
 @Component({
-  components: { Error, CustomButton, Cell }
+  components: { TextInput, Error, CustomButton, Cell }
 })
 export default class Judges extends Vue {
   @Getter errors!: APIError[];
   @Getter judges!: Judge[];
+
+  judgeName = "";
+
+  get localJudges(): Judge[] {
+    return this.judges.filter(judge =>
+      judge.name.toLowerCase().includes(this.judgeName.toLowerCase())
+    );
+  }
 
   created() {
     this.$store.dispatch("fetchJudges").catch();

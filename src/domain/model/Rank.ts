@@ -8,6 +8,8 @@ export interface Rank {
   finished: boolean;
 }
 
+export const getRankName = (rank: Rank) => `${rank.category} ${rank.number}`;
+
 export interface ApiRank {
   number: number;
   category: string;

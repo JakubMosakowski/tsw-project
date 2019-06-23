@@ -34,7 +34,7 @@ import Component from "vue-class-component";
 import CustomButton from "@/presentation/commons/components/CustomButton.vue";
 import { RacingHorse } from "@/domain/model/Horse";
 import TextInput from "@/presentation/adminPanel/components/common/TextInput.vue";
-import { Rank } from "@/domain/model/Rank";
+import { getRankName, Rank } from "@/domain/model/Rank";
 import Dropdown from "@/presentation/adminPanel/components/common/Dropdown.vue";
 import _ from "lodash";
 import Error from "@/presentation/commons/Error.vue";
@@ -82,7 +82,7 @@ export default class HorseDetail extends Vue {
 
   get rankConfig(): any {
     return this.ranks.map(it => {
-      return { id: it.id, text: `${it.category} ${it.number}` };
+      return { id: it.id, text: getRankName(it) };
     });
   }
 

@@ -9,7 +9,8 @@ import {
   faTrash,
   faFlag,
   faPlus,
-  faSort
+  faSort,
+  faMedal
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faEdit);
@@ -17,14 +18,11 @@ library.add(faFlag);
 library.add(faTrash);
 library.add(faPlus);
 library.add(faSort);
+library.add(faMedal);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.config.productionTip = false;
-//TODO sprawdz czy działa ta zakończona klasa
-//TODO niech wera all testuje na netlify
-
 //TODO opcjonalnie:
-//todo szukajka na stronie koni/sędziw/rank/notesPanel/klient
 //todo poprawki cssow
 //todo sprawdz na innych przegladarkach (firefox/chrome/edge)
 //todo sprawdz jak dziala na telefonach

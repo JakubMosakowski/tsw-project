@@ -42,7 +42,7 @@ select {
   display: block;
   margin-top: 10px;
   padding: 15px;
-  width: 95%;
+  width: 100%;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;

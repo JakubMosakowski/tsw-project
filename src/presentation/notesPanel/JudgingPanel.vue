@@ -85,7 +85,7 @@ export default class JudgingPanel extends Vue {
   }
 
   horseClicked(horse: RacingHorse) {
-    this.$router.replace({ path: `/notes/${horse.id}` });
+    this.$router.push({ path: `/notes/${horse.id}` });
   }
 
   iconClicked(horse: RacingHorse) {
