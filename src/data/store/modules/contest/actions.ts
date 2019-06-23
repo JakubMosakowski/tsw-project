@@ -15,12 +15,21 @@ export const actions: ActionTree<ContestState, RootState> = {
   connectToSocket: ({ dispatch }) => {
     socket.emit("connected");
     socket.on("horses", (data: RacingHorse[]) => {
+      console.log("HORSES");
+      console.log(data.length);
+
       dispatch("horsesFetchedFromSocket", data).catch();
     });
     socket.on("judges", (data: Judge[]) => {
+      console.log("RANKS");
+      console.log(data.length);
+
       dispatch("judgesFetchedFromSocket", data).catch();
     });
     socket.on("ranks", (data: Rank[]) => {
+      console.log("RANKS");
+      console.log(data.length);
+
       dispatch("ranksFetchedFromSocket", data).catch();
     });
   },
