@@ -1,11 +1,13 @@
 <template>
-  <label class="textInputWrapper">
+  <label class="numberInputWrapper">
     {{ label }}
     <input
-      type="text"
-      :placeholder="placeholder"
       :value="value"
       @input="valueChange"
+      :placeholder="placeholder"
+      type="number"
+      step="1"
+      min="1"
       :maxlength="maxLength"
     />
   </label>
@@ -27,12 +29,12 @@ import Component from "vue-class-component";
     },
     maxLength: {
       type: Number,
-      default: 50
+      default: 5
     },
     value: String
   }
 })
-export default class TextInput extends Vue {
+export default class NumberInput extends Vue {
   valueChange(event: any) {
     this.$emit("update:value", event.target.value);
   }

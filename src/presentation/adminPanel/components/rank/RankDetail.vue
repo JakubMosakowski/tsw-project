@@ -1,7 +1,7 @@
 <template>
   <div class="rankDetailWrapper">
     <TextInput label="Kategoria" :value.sync="category" />
-    <TextInput label="Numer" :value.sync="stringNumber" :isNumeric="true" />
+    <NumberInput label="Numer" :value.sync="stringNumber" />
     <h2>Sędziowie w komisji:</h2>
     <JudgesCheckboxGroup
       :judges="judges"
@@ -31,9 +31,11 @@ import { Rank } from "@/domain/model/Rank";
 import { Judge } from "@/domain/model/Judge";
 import Checkbox from "@/presentation/adminPanel/components/common/Checkbox.vue";
 import JudgesCheckboxGroup from "@/presentation/adminPanel/components/common/JudgesCheckboxGroup.vue";
+import NumberInput from "@/presentation/adminPanel/components/common/NumberInput.vue";
 
 @Component({
   components: {
+    NumberInput,
     JudgesCheckboxGroup,
     Checkbox,
     Error,

@@ -2,7 +2,7 @@
   <label class="textInputWrapper">
     {{ label }}
     <input
-      type="text"
+      type="password"
       :placeholder="placeholder"
       :value="value"
       @input="valueChange"
@@ -32,7 +32,7 @@ import Component from "vue-class-component";
     value: String
   }
 })
-export default class TextInput extends Vue {
+export default class PasswordInput extends Vue {
   valueChange(event: any) {
     this.$emit("update:value", event.target.value);
   }

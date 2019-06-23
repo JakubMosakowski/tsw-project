@@ -2,7 +2,7 @@
   <div class="loginWrapper">
     <h1>Logowanie</h1>
     <TextInput placeholder="Login" :value.sync="name" />
-    <TextInput placeholder="Hasło" :value.sync="password" />
+    <PasswordInput placeholder="Hasło" :value.sync="password" />
     <CustomButton @clicked="login" text="Zaloguj" />
     <Error :errors="errors" />
   </div>
@@ -16,9 +16,11 @@ import Component from "vue-class-component";
 import { Getter } from "vuex-class";
 import { APIError } from "@/domain/model/APIError";
 import TextInput from "@/presentation/adminPanel/components/common/TextInput.vue";
+import PasswordInput from "@/presentation/adminPanel/components/common/PasswordInput.vue"
 
 @Component({
   components: {
+    PasswordInput,
     TextInput,
     CustomButton,
     Error
