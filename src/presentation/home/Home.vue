@@ -7,9 +7,8 @@
         :label="getLabel(rank)"
         :withButtons="false"
         @cellClicked="clicked(rank)"
+        :icon="hasMedal(rank)"
       />
-      <font-awesome-icon v-if="rank.finished" icon="medal" size="lg" />
-      <div v-else class="filler"></div>
     </div>
   </div>
 </template>
@@ -38,6 +37,10 @@ export default class Home extends Vue {
         .toLowerCase()
         .includes(this.rankName.toLowerCase())
     );
+  }
+
+  hasMedal(rank: Rank): string | null {
+    return rank.finished ? "medal" : null;
   }
 
   created() {
@@ -69,8 +72,5 @@ export default class Home extends Vue {
 .cell {
   display: flex;
   align-items: center;
-}
-.filler {
-  width: 21.33px;
 }
 </style>

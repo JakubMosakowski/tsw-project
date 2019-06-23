@@ -8,17 +8,17 @@
       :chosen-value.sync="YOB"
       :values="yearConfig"
     />
-    <TextInput label="Kolor" :value.sync="color" />
+    <TextInput label="Maść" :value.sync="color" />
     <Dropdown label="Płeć" :chosen-value.sync="sex" :values="sexConfig" />
-    <TextInput label="Nazwa hodowcy" :value.sync="breederName" />
+    <TextInput label="Imię i nazwisko hodowcy" :value.sync="breederName" />
     <TextInput label="Kraj hodowcy" :value.sync="breederCountry" />
-    <TextInput label="Nazwa właściciela" :value.sync="ownerName" />
+    <TextInput label="Imię i nazwisko właściciela" :value.sync="ownerName" />
     <TextInput label="Kraj właściciela" :value.sync="ownerCountry" />
-    <TextInput label="Nazwa ojca konia" :value.sync="fatherName" />
+    <TextInput label="Imię ojca konia" :value.sync="fatherName" />
     <TextInput label="Kraj ojca konia" :value.sync="fatherCountry" />
-    <TextInput label="Nazwa matki konia" :value.sync="motherName" />
+    <TextInput label="Imię matki konia" :value.sync="motherName" />
     <TextInput label="Kraj matki konia" :value.sync="motherCountry" />
-    <TextInput label="Nazwa ojca matki konia" :value.sync="mothersFatherName" />
+    <TextInput label="Imię ojca matki konia" :value.sync="mothersFatherName" />
     <TextInput
       label="Kraj ojca matki konia"
       :value.sync="mothersFatherCountry"
@@ -101,7 +101,7 @@ export default class HorseDetail extends Vue {
   }
 
   get yearConfig(): any {
-    return _.range(1950, new Date().getFullYear()).map(it => {
+    return _.range(1951, new Date().getFullYear()).map(it => {
       return { id: it, text: it };
     });
   }

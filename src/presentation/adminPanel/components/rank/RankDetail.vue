@@ -122,7 +122,9 @@ export default class RankDetail extends Vue {
       number: this.number,
       category: this.category,
       finished: this.finished,
-      committee: this.committee.map(it => it.id),
+      committee: this.committee.map(
+        it => this.judges.find(judge => judge.id == it.id)!
+      ),
       id: "-1"
     };
   }

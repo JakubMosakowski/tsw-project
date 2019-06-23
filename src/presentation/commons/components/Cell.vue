@@ -4,6 +4,7 @@
       <h3 v-if="withIndex" class="number">{{ index }}.</h3>
       <h3 class="label">{{ label }}</h3>
     </div>
+    <font-awesome-icon v-if="icon" :icon="icon" fixed-width />
     <EditAndDelete
       v-if="withButtons"
       @editClicked="editClicked(editClicked)"
@@ -24,6 +25,10 @@ import EditAndDelete from "@/presentation/commons/components/EditAndDelete.vue";
     withButtons: {
       default: true,
       type: Boolean
+    },
+    icon: {
+      type: String,
+      required: false
     }
   },
   components: { EditAndDelete }

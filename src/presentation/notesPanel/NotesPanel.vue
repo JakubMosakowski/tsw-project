@@ -7,6 +7,7 @@
         :label="getLabel(rank)"
         :withButtons="false"
         @cellClicked="clicked(rank)"
+        :icon="hasMedal(rank)"
       />
     </div>
   </div>
@@ -32,6 +33,10 @@ export default class NotesPanel extends Vue {
 
   created() {
     this.$store.dispatch("fetchAll").catch();
+  }
+
+  hasMedal(rank: Rank): string | null {
+    return rank.finished ? "medal" : null;
   }
 
   get localRanks(): Rank[] {

@@ -1,7 +1,7 @@
 <template>
   <div class="horseReorderWrapper">
     <CustomButton @clicked="saveClicked" text="Zapisz" />
-
+    <p>Przeciągnij konia aby zmienić mu numer.</p>
     <draggable
       v-bind="dragOptions"
       @start="drag = true"

@@ -22,10 +22,6 @@ library.add(faMedal);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.config.productionTip = false;
-//TODO opcjonalnie:
-//todo poprawki cssow
-//todo sprawdz na innych przegladarkach (firefox/chrome/edge)
-//todo sprawdz jak dziala na telefonach
 
 new Vue({
   router,

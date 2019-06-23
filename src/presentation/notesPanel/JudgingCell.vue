@@ -5,8 +5,7 @@
       first: isFirst,
       second: isSecond,
       third: isThird,
-      needArbiter: needArbiter && !disabled,
-      disabled: disabled
+      needArbiter: needArbiter && !disabled
     }"
     @click="cellClicked"
   >
@@ -71,16 +70,6 @@ export default class JudgingCell extends Vue {
   align-items: center;
   width: 430px;
   border: 1px solid black;
-  &:hover {
-    border: 3px solid black;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-}
-.disabled:hover {
-  border: 1px solid black !important;
-  border-radius: 0 !important;
-  cursor: default !important;
 }
 
 .label {
@@ -91,16 +80,17 @@ export default class JudgingCell extends Vue {
 }
 
 .first {
-  background: gold;
+  background: #fee101;
 }
 
 .second {
-  background: white;
+  background: #d7d7d7;
 }
 
 .third {
-  background: brown;
+  background: #824a02;
 }
+
 .icon {
   margin-left: 10px;
   margin-right: 10px;

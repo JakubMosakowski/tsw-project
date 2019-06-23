@@ -102,4 +102,10 @@ export default class JudgingPanel extends Vue {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.judgingCellWrapper:hover {
+  border: 3px solid black;
+  border-radius: 4px;
+  cursor: pointer;
+}
+</style>

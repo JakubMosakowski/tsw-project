@@ -1,7 +1,7 @@
 <template>
   <div class="judgeDetailWrapper">
-    <TextInput label="Nazwa" :value.sync="name" />
-    <TextInput label="Kraj" :value.sync="country" />
+    <TextInput label="Imie i nazwisko sędziego" :value.sync="name" />
+    <TextInput label="Kraj" :value.sync="country" :max-length="4" />
     <Error :errors="errors" />
     <CustomButton @clicked="save" text="Zapisz" :is-enabled="isClickable" />
   </div>
