@@ -1,13 +1,11 @@
 import axios, { Method } from "axios";
 import { UserData } from "@/domain/model/UserData";
 import { RacingHorse } from "@/domain/model/Horse";
-import { getUserToken } from "@/data/storage/storageManager";
 import { PostRacingHorse, PutRacingHorse } from "@/domain/model/PutRacingHorse";
 import { Human } from "@/domain/model/Human";
 import { ApiRank } from "@/domain/model/Rank";
 
 const client = axios.create();
-client.defaults.headers.common["Authorization"] = `Bearer ${getUserToken()}`;
 export const APP_URL = "https://tsw-project-server.herokuapp.com";
 
 export class API {
