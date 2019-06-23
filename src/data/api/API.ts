@@ -4,6 +4,7 @@ import { RacingHorse } from "@/domain/model/Horse";
 import { PostRacingHorse, PutRacingHorse } from "@/domain/model/PutRacingHorse";
 import { Human } from "@/domain/model/Human";
 import { ApiRank } from "@/domain/model/Rank";
+import { getUserToken } from "@/data/storage/storageManager";
 
 const client = axios.create();
 export const APP_URL = "https://tsw-project-server.herokuapp.com";
@@ -13,7 +14,10 @@ export class API {
     return client({
       url: APP_URL + resource,
       data: data,
-      method: method
+      method: method,
+      headers: {
+        Authorization: `Bearer ${getUserToken()}`
+      }
     });
   }
 
