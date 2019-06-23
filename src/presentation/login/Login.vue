@@ -16,7 +16,7 @@ import Component from "vue-class-component";
 import { Getter } from "vuex-class";
 import { APIError } from "@/domain/model/APIError";
 import TextInput from "@/presentation/adminPanel/components/common/TextInput.vue";
-import PasswordInput from "@/presentation/adminPanel/components/common/PasswordInput.vue"
+import PasswordInput from "@/presentation/adminPanel/components/common/PasswordInput.vue";
 
 @Component({
   components: {
