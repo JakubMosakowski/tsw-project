@@ -9,7 +9,7 @@
       <JudgingCell
         :needArbiter="needArbiter(horse)"
         :label="horse.name"
-        :index="index"
+        :index="horse.number"
         :score="getSum(horse)"
         @cellClicked="horseClicked(horse)"
         @iconClicked="iconClicked(horse)"
@@ -68,20 +68,23 @@ export default class JudgingPanel extends Vue {
 
   get horsesSorted() {
     return this.horsesByRank.sort((a, b) => {
-      const sumAllA = sumAll(a.notes);
-      const sumAllB = sumAll(b.notes);
-      if (sumAllA != sumAllB) return sumAllB - sumAllA;
-
-      const sumLeftA = sumLeft(a.notes);
-      const sumLeftB = sumLeft(b.notes);
-      if (sumLeftA != sumLeftB) return sumLeftB - sumLeftA;
-
-      const sumRightA = sumRight(a.notes);
-      const sumRightB = sumRight(b.notes);
-      if (sumRightA != sumRightB) return sumRightB - sumRightA;
-
-      return b.arbitratorValue - a.arbitratorValue;
+      return b.number - a.number;
     });
+    // return this.horsesByRank.sort((a, b) => {
+    //   const sumAllA = sumAll(a.notes);
+    //   const sumAllB = sumAll(b.notes);
+    //   if (sumAllA != sumAllB) return sumAllB - sumAllA;
+    //
+    //   const sumLeftA = sumLeft(a.notes);
+    //   const sumLeftB = sumLeft(b.notes);
+    //   if (sumLeftA != sumLeftB) return sumLeftB - sumLeftA;
+    //
+    //   const sumRightA = sumRight(a.notes);
+    //   const sumRightB = sumRight(b.notes);
+    //   if (sumRightA != sumRightB) return sumRightB - sumRightA;
+    //
+    //   return b.arbitratorValue - a.arbitratorValue;
+    // });
   }
 
   horseClicked(horse: RacingHorse) {
