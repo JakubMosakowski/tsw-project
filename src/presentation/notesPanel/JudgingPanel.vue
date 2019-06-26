@@ -38,6 +38,10 @@ export default class JudgingPanel extends Vue {
     return this.horses.filter(item => item.rank.id == this.$route.params.id);
   }
 
+  created() {
+    this.$store.dispatch("fetchAll").catch();
+  }
+
   getSum(horse: RacingHorse) {
     return sumAll(horse.notes);
   }
